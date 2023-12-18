@@ -19,8 +19,15 @@ WindowAdmin::WindowAdmin(QWidget *parent) :
     ui->baseside->setStyleSheet("background-color: rgb(90, 95, 111);");
 
     gridLayout_main = new QGridLayout(ui->scroll_widget_main);
+
+    connect(ui->SearchLine, &QLineEdit::textChanged, this, &WindowAdmin::updateSearchResults);
+
 }
 
+void WindowAdmin::updateSearchResults(const QString &text) {
+   // searchResultsList->clear();
+    displayEmployeesForAdmin(idCompany, text);
+}
 
 void WindowAdmin::loginWithCredentials(const QString &email, const QString &password)
 {
@@ -39,13 +46,14 @@ void WindowAdmin::loginWithCredentials(const QString &email, const QString &pass
         qDebug() << "Успішний вхід. IdCompany =" << idCompany;
         qDebug() << "Успішний вхід. name =" << name;
 
-        displayEmployeesForAdmin(idCompany);
+        QString searchText = ui->SearchLine->text();
+        displayEmployeesForAdmin(idCompany, searchText);
     } else {
         qDebug() << "Невірний email або пароль";
     }
 }
 
-void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany)
+void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany, const QString &seachText)
 {
     int row = 0;
     int col = 0;
@@ -64,91 +72,36 @@ void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany)
     while (query.next()) {
         QString employeeName = query.value("full_name").toString();
         QString email = query.value("email").toString();
-        QPushButton *button = new QPushButton();
-        button->setText(QString("%1\n%2").arg(employeeName).arg(email));
-        button->setStyleSheet("text-align: left;");
+        if (employeeName.toLower().startsWith(seachText.toLower())) {
 
-        connect(button, &QPushButton::clicked, this, [this, employeeName, email, button]()
-                {
-                    onEmployeeButtonClicked(employeeName, email);
-                });
+            QPushButton *button = new QPushButton();
+            button->setText(QString("%1\n%2").arg(employeeName).arg(email));
+            button->setStyleSheet("text-align: left;");
 
-        gridlayout_->setSpacing(0);
-        gridlayout_->setContentsMargins(0, 0, 0, 0);
-        gridlayout_->addWidget(button, row, col);
-        col++;
-        if (col == 1) {
-            col = 0;
-            row++;
+            connect(button, &QPushButton::clicked, this, [this, employeeName, email, button]()
+                    {
+                        onEmployeeButtonClicked(employeeName, email);
+                    });
+
+            gridlayout_->setSpacing(0);
+            gridlayout_->setContentsMargins(0, 0, 0, 0);
+            gridlayout_->addWidget(button, row, col);
+            col++;
+            if (col == 1) {
+                col = 0;
+                row++;
+            }
         }
+
+/*
+        if (employeeName.toLower().contains(seachText.toLower())) {
+            QListWidgetItem *item = new QListWidgetItem(employeeName);
+            searchResultsList->addItem(item);
+        }*/
+
     }
     ui->scrollAreaWidgetContents->setLayout(gridlayout_);
 }
-
-void WindowAdmin::handleButtonClick(QPushButton *clickedButton)
-{
-    if (clickedButton->property("active").toBool()) {
-        // If the button is active, make it inactive
-        clickedButton->setStyleSheet(""
-                                     "background-color: rgb(30, 101, 172);;"
-                                     "color: white;"
-                                     "text-align: left;");
-        clickedButton->setProperty("active", false);
-        currentSelectedButton = nullptr;
-    } else {
-        clickedButton->setStyleSheet("background-color: rgb(30, 101, 172);"
-                                     "color: white;"
-                                     "text-align: left;");
-        clickedButton->setProperty("active", true);
-
-        if (currentSelectedButton && currentSelectedButton != clickedButton) {
-            currentSelectedButton->setStyleSheet(""
-                                                 "background-color: rgb(90, 95, 111);;"
-                                                 "color: black;"
-                                                 "text-align: left;");
-            currentSelectedButton->setProperty("active", false);
-        }
-
-        currentSelectedButton = clickedButton;
-    }
-}
-
-
-void WindowAdmin::loadDeadlines(int employeeId)
-{
-    QList<QDate> deadlines = getDeadlines(employeeId);
-
-    // Перевірте, чи кількість зчитаних дедлайнів відповідає кількості dateEdit у вашому інтерфейсі
-    if (deadlines.size() != dateEdits.size()) {
-        qDebug() << "Помилка: Розмір списку дедлайнів не відповідає розміру dateEdits";
-        return;
-    }
-
-    // Встановлюємо дедлайни для кожного dateEdit
-    for (int i = 0; i < dateEdits.size(); ++i) {
-        setDateTime(dateEdits[i], deadlines[i]);
-    }
-}
-
-QList<QDate> WindowAdmin::getDeadlines(int employeeId)
-{
-    QList<QDate> deadlines;
-
-    QSqlQuery queryDeadlines;
-    queryDeadlines.prepare("SELECT deadline FROM tasks WHERE assigned_to_employee_id = :employeeId");
-    queryDeadlines.bindValue(":employeeId", employeeId);
-
-    if (queryDeadlines.exec()) {
-        while (queryDeadlines.next()) {
-            deadlines.append(queryDeadlines.value("deadline").toDate());
-        }
-    } else {
-        qDebug() << "Помилка отримання дедлайнів:" << queryDeadlines.lastError().text();
-    }
-
-    return deadlines;
-}
-
 void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) // метод натиснення на кнопку
 {
     selectedAdminId = idCompany;
@@ -187,7 +140,7 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
             lineEdits[i]->setText(description);
 
             loadDeadlines(selectedEmployeeId);
-
+            ///або тут ЛОГІКА читання з бази натиснуті checkbox
 
             i++;
         }
@@ -214,10 +167,78 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
     for (int i = 0; i < qMin(tasks.size(), dateEdits.size()); ++i) {
         lineEdits[i]->setText(tasks[i]);
         setDateTime(dateEdits[i], dates[i]);
+            ///або тут ЛОГІКА читання з бази натиснуті checkbox
+
     }
 }
 
 
+
+
+
+void WindowAdmin::handleButtonClick(QPushButton *clickedButton)
+{
+    if (clickedButton->property("active").toBool()) {
+        // If the button is active, make it inactive
+        clickedButton->setStyleSheet(""
+                                     "background-color: rgb(30, 101, 172);;"
+                                     "color: white;"
+                                     "text-align: left;");
+        clickedButton->setProperty("active", false);
+        currentSelectedButton = nullptr;
+    } else {
+        clickedButton->setStyleSheet("background-color: rgb(30, 101, 172);"
+                                     "color: white;"
+                                     "text-align: left;");
+        clickedButton->setProperty("active", true);
+
+        if (currentSelectedButton && currentSelectedButton != clickedButton) {
+            currentSelectedButton->setStyleSheet(""
+                                                 "background-color: rgb(90, 95, 111);;"
+                                                 "color: black;"
+                                                 "text-align: left;");
+            currentSelectedButton->setProperty("active", false);
+        }
+
+        currentSelectedButton = clickedButton;
+    }
+}
+
+
+void WindowAdmin::loadDeadlines(int employeeId)
+{
+    QList<QDate> deadlines = getDeadlines(employeeId);
+    qDebug()<< deadlines.size()<<", " << dateEdits.size();
+    // Перевірте, чи кількість зчитаних дедлайнів відповідає кількості dateEdit у вашому інтерфейсі
+    if (deadlines.size() != dateEdits.size()) {
+        qDebug() << "Помилка: Розмір списку дедлайнів не відповідає розміру dateEdits";
+        return;
+    }
+
+    // Встановлюємо дедлайни для кожного dateEdit
+    for (int i = 0; i < dateEdits.size(); ++i) {
+        setDateTime(dateEdits[i], deadlines[i]);
+    }
+}
+
+QList<QDate> WindowAdmin::getDeadlines(int employeeId)
+{
+    QList<QDate> deadlines;
+
+    QSqlQuery queryDeadlines;
+    queryDeadlines.prepare("SELECT deadline FROM tasks WHERE assigned_to_employee_id = :employeeId");
+    queryDeadlines.bindValue(":employeeId", employeeId);
+
+    if (queryDeadlines.exec()) {
+        while (queryDeadlines.next()) {
+            deadlines.append(queryDeadlines.value("deadline").toDate());
+        }
+    } else {
+        qDebug() << "Помилка отримання дедлайнів:" << queryDeadlines.lastError().text();
+    }
+
+    return deadlines;
+}
 
 
 
@@ -429,6 +450,7 @@ void WindowAdmin::on_btn_save_clicked()
 
     if (lineEdits.isEmpty() || dateEdits.isEmpty()) {
         qDebug() << "Пусті списки lineEdits або dateEdits";
+        // ТУТ МОЖНА ВИВЕСТИ ЗАМІСТЬ ТИХ КНОПОК ТЕКСТ LABEL, ЩО НЕ ПРАЦІВНИКІВ ПОКИ ЩО НЕМАЄ
         return;
     }
 

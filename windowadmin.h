@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QSqlError>
 #include <QVBoxLayout>
+#include <QListWidget>
 #include <QLabel>
 #include <QScrollArea>
 #include <unordered_set>
@@ -46,7 +47,7 @@ public:
 
 public slots:
     void loginWithCredentials(const QString &email, const QString &password);
-    void displayEmployeesForAdmin(int adminIdCompany);
+    void displayEmployeesForAdmin(int adminIdCompany, const QString &seachText);
     void onLabelClicked(const QString &link);
     void handleButtonClick(QPushButton *clickedButton);
     void onEmployeeButtonClicked(QString employeeName, QString email); // метод натиснення на кнопку
@@ -57,6 +58,7 @@ public slots:
     QList<QDate> getDateForEmployee(int employeeId);//-+
 
    // void updateSearchResults(const QString &searchText);
+    void updateSearchResults(const QString &text);
 
 
     QList<QDate> getDeadlines(int employeeId);
@@ -102,20 +104,19 @@ private:
     QString selectedEmployeeEmail;
     int selectedEmployeeId;
     int selectedAdminId;
-
     int idCompany;
 
     bool buttonClicked = false;
     bool isTrue = true;
-
     bool isChecked = false;
 
     QLineEdit * l = new QLineEdit();
     QString currentTask;
-
     QDateEdit *currentDateEdit;
 
     QList<QDate> deadlines;
+
+  //  QListWidget *searchResultsList;
 
 
 };
