@@ -166,20 +166,6 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
 }
 
 
-bool WindowAdmin::hasDoneTasks(int employeeId)
-{
-    QSqlQuery query;
-    query.prepare("SELECT COUNT(*) FROM tasks WHERE assigned_to_employee_id = :employeeId AND status = 'done'");
-    query.bindValue(":employeeId", employeeId);
-
-    if (query.exec() && query.next()) {
-        int doneTaskCount = query.value(0).toInt();
-        return doneTaskCount > 0;
-    } else {
-        qDebug() << "Error checking if employee has done tasks:" << query.lastError().text();
-        return false;
-    }
-}
 
 
 
@@ -227,9 +213,6 @@ void WindowAdmin::loadDeadlines(int employeeId)
         setDateTime(dateEdits[i], deadlines[i]);
     }
 }
-
-
-
 
 QList<QDate> WindowAdmin::getDeadlines(int employeeId)
 {
@@ -407,7 +390,7 @@ void WindowAdmin::createLineEdits(int number)
         rowLayout->addWidget(dateEdit);
 
         QCheckBox * checkbox = new QCheckBox();
-        checkbox->setEnabled(false);
+        checkbox->setEnabled(false);  // Встановлення режиму "readonly"
 
         rowLayout->addWidget(checkbox);
 
@@ -418,12 +401,6 @@ void WindowAdmin::createLineEdits(int number)
         dateEdits.append(dateEdit);
         checkBoxes.append(checkbox);
 
-        // Отримання і встановлення статусу чекбокса відповідно до бази даних
-        int selectedEmployeeId = getEmployeeId(selectedEmployeeName, selectedEmployeeEmail);
-        if (selectedEmployeeId != -1) {
-            bool hasDoneTask = hasDoneTasks(selectedEmployeeId);
-            checkbox->setChecked(hasDoneTask);
-        }
 
     }
     ui->widget_tasks->setLayout(layout_2);

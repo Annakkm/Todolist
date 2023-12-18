@@ -54,11 +54,9 @@ public slots:
     void clearDateEdits();
     void setDateTime(QDateEdit* dateEdit, const QDate& deadlineDat);
 
-    bool hasDoneTasks(int employeeId);
 
     QList<QDate> getDateForEmployee(int employeeId);//-+
 
-   // void updateSearchResults(const QString &searchText);
     void updateSearchResults(const QString &text);
 
 
