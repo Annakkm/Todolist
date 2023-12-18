@@ -1,0 +1,54 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/5402366_delete_remove_cross_cancel_close_icon.png</file>
+        <file>img/withwhiteandblue_minus_circle_remove_icon.png</file>
+        <file>img/withwhiteandblue_x_circle_icon.png</file>
+        <file>img/white_minus_circle_remove_icon.png</file>
+        <file>img/white_x_circle_icon.png</file>
+        <file>img/white_information_about_support_accessibility_info_icon.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix1">
+        <file>img/cancel.png</file>
+        <file>img/x-button.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix2">
+        <file>img/contract.png</file>
+        <file>img/employee.png</file>
+        <file>img/information.png</file>
+        <file>img/user (1).png</file>
+        <file>img/user.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix36">
+        <file>img/5402366_delete_remove_cross_cancel_close_icon.png</file>
+        <file>img/5402388_information_about_support_accessibility_info_icon.png</file>
+        <file>img/5402406_three dots_icon.png</file>
+        <file>img/5402408_list_menu_options_playlist_checklist_icon.png</file>
+        <file>img/5402435_account_profile_user_avatar_man_icon.png</file>
+        <file>img/8666736_x_circle_icon.png</file>
+        <file>img/8666813_minus_circle_remove_icon.png</file>
+        <file>img/cancel.png</file>
+        <file>img/check.png</file>
+        <file>img/close.png</file>
+        <file>img/contract.png</file>
+        <file>img/employee.png</file>
+        <file>img/information.png</file>
+        <file>img/minus.png</file>
+        <file>img/task.png</file>
+        <file>img/testinfo_icon.png</file>
+        <file>img/user (1).png</file>
+        <file>img/user.png</file>
+        <file>img/white_information_about_support_accessibility_info_icon.png</file>
+        <file>img/white_minus_circle_remove_icon.png</file>
+        <file>img/white_x_circle_icon.png</file>
+        <file>img/withwhiteandblue_minus_circle_remove_icon.png</file>
+        <file>img/withwhiteandblue_x_circle_icon.png</file>
+        <file>img/x-button.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix3">
+        <file>img/search.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix4">
+        <file>img/calendar.png</file>
+        <file>img/calendar_white.png</file>
+    </qresource>
+</RCC>

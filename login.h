@@ -1,0 +1,39 @@
+#ifndef LOGIN_H
+#define LOGIN_H
+
+#include <QDialog>
+#include <qdebug.h>
+#include <QString>
+#include "connectdb.h"
+#include "windowadmin.h"
+#include "windowemployee.h"
+
+class Mainwindow;
+
+namespace Ui {
+class Login;
+}
+
+class Login : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit Login(QWidget *parent = nullptr);
+    ~Login();
+
+private slots:
+
+    void on_btnEnter_clicked();
+    void on_btnclose_clicked();
+    void on_btnlogin_2_clicked();
+
+private:
+    Ui::Login *ui;
+    ConnectDB db;
+    WindowAdmin * wAdmin;
+    WindowEmployee * wEmployee;
+
+};
+
+#endif // LOGIN_H

@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Registration</class>
+ <widget class="QDialog" name="Registration">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>479</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Registration</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Img.qrc">
+    <normaloff>:/new/prefix36/img/task.png</normaloff>:/new/prefix36/img/task.png</iconset>
+  </property>
+  <widget class="QLabel" name="labelFon">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>941</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+background-color: rgb(54, 57, 67);
+}
+
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnclose">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>20</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-image: url(://img/white_x_circle_icon.png);
+	background-color: transparent;
+	background: none;
+	border: none;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_reg">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>50</y>
+     <width>479</width>
+     <height>57</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Fixel Black</family>
+     <pointsize>23</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+color: rgb(255, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Реєстрація</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>110</y>
+     <width>351</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_email">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+      </property>
+      <property name="text">
+       <string>email</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_password">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+      </property>
+      <property name="text">
+       <string>password</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit_password">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+      </property>
+      <property name="maxLength">
+       <number>20</number>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_username">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+      </property>
+      <property name="text">
+       <string>username</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="lineEdit_phoneNumber">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="tabletTracking">
+       <bool>false</bool>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::WheelFocus</enum>
+      </property>
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+      </property>
+      <property name="inputMask">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>32767</number>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
+      <property name="cursorPosition">
+       <number>0</number>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_phone">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+      </property>
+      <property name="text">
+       <string>number phone</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="lineEdit_email">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="toolTipDuration">
+       <number>-4</number>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+      </property>
+      <property name="maxLength">
+       <number>35</number>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+      <property name="cursorMoveStyle">
+       <enum>Qt::LogicalMoveStyle</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="lineEdit_fullname">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>20</number>
+      </property>
+      <property name="cursorPosition">
+       <number>0</number>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>370</y>
+     <width>331</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox{
+border: none;
+}</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QRadioButton" name="radioBtnAdmin">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>10</y>
+      <width>60</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QRadioButton{
+font-size: 12px;
+font-weignt:  500;
+text-transform: capitalize;
+display: inline-block;
+vertical-align: middle;
+color: rgb(153, 153, 153);
+}
+
+QRadioButton::hover{
+color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>Admin</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioBtnWorker">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>10</y>
+      <width>91</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QRadioButton{
+font-size: 12px;
+font-weignt:  300;
+text-transform: capitalize;
+display: inline-block;
+vertical-align: middle;
+color: rgb(153, 153, 153);
+}
+
+QRadioButton::hover{
+color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>Employee</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnlogin_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>410</y>
+     <width>201</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+background: rgb(255, 255, 255);;
+border-radius: 20px;
+color: rgb(37, 125, 214);
+font-size: 15px; 
+font-weight: bold;
+}
+QPushButton:hover{
+background: rgb(30, 101, 172);
+color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Зареєструватися</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>460</y>
+     <width>155</width>
+     <height>43</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_link1">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  11;
+color: rgb(153, 153, 153);
+}</string>
+      </property>
+      <property name="text">
+       <string>Маєте акаунт?</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_link2">
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+background: transparent;
+border: none;
+color: rgb(153, 153, 153);
+}
+
+QPushButton::hover{
+color: rgb(36, 122, 208);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Log in</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_id">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>350</y>
+     <width>82</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>82</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri</family>
+     <pointsize>10</pointsize>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+   </property>
+   <property name="maxLength">
+    <number>5</number>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_idtext">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>339</y>
+     <width>87</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+   </property>
+   <property name="text">
+    <string>id company:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_id_read_only">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>350</y>
+     <width>82</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>82</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri</family>
+     <pointsize>10</pointsize>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+background: transparent;
+text-align: right;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Img.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>radioBtnAdmin</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEdit_id_read_only</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>390</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>455</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioBtnAdmin</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEdit_id</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>212</x>
+     <y>390</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioBtnWorker</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEdit_id</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>391</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>312</x>
+     <y>364</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioBtnWorker</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEdit_id_read_only</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>339</x>
+     <y>391</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>412</x>
+     <y>446</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioBtnAdmin</sender>
+   <signal>clicked()</signal>
+   <receiver>label_idtext</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>390</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>166</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioBtnWorker</sender>
+   <signal>clicked()</signal>
+   <receiver>label_idtext</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>291</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

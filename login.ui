@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Login</class>
+ <widget class="QDialog" name="Login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>479</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Login</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Img.qrc">
+    <normaloff>:/new/prefix36/img/task.png</normaloff>:/new/prefix36/img/task.png</iconset>
+  </property>
+  <widget class="QLabel" name="labelFon">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>481</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+background-color: rgb(54, 57, 67);
+}
+
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnclose">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>20</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-image: url(://img/white_x_circle_icon.png);
+	background-color: transparent;
+	background: none;
+	border: none;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_reg">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>90</y>
+     <width>151</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Fixel Black</family>
+     <pointsize>30</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+color: rgb(255, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Логін</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>190</y>
+     <width>331</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="lineEdit_email">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_email">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+      </property>
+      <property name="text">
+       <string>email</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_password">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  0;
+pointer_events: none;
+color: rgb(153, 153, 153);
+text-transform: 	uppercase;
+}</string>
+      </property>
+      <property name="text">
+       <string>password</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="lineEdit_password">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+background: transparent;
+border: none;
+border-bottom: 2px solid rgb(153, 153, 153);
+color: rgb(255, 255, 255);
+}
+
+QLineEdit:valid{
+border-buttom: 2px solid;
+}
+
+QLineEdit:hover{
+border-bottom: 2px solid rgb(37, 125, 213);
+}
+</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>410</y>
+     <width>159</width>
+     <height>39</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_link1">
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+position: absolute;
+left: 0;
+padding: 10 px  11;
+color: rgb(153, 153, 153);
+}</string>
+      </property>
+      <property name="text">
+       <string>Не маєте акаунту ?</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_link2">
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+background: transparent;
+border: none;
+color: rgb(153, 153, 153);
+}
+
+QPushButton::hover{
+color: rgb(36, 122, 208);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Sign up</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="btnlogin_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>360</y>
+     <width>201</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+background: rgb(30, 101, 172);
+border-radius: 20px;
+color: rgb(255, 255, 255);
+font-size: 15px; 
+font-weight: bold;
+}
+QPushButton:hover{
+background: rgb(255, 255, 255);
+color: rgb(37, 125, 214);
+}</string>
+   </property>
+   <property name="text">
+    <string>Логін</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioBtnAdmin">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>330</y>
+     <width>60</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QRadioButton{
+font-size: 12px;
+font-weignt:  500;
+text-transform: capitalize;
+display: inline-block;
+vertical-align: middle;
+color: rgb(153, 153, 153);
+}
+
+QRadioButton::hover{
+color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Admin</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioBtnWorker">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>330</y>
+     <width>81</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QRadioButton{
+font-size: 12px;
+font-weignt:  300;
+text-transform: capitalize;
+display: inline-block;
+vertical-align: middle;
+color: rgb(153, 153, 153);
+}
+
+QRadioButton::hover{
+color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Employee</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Img.qrc"/>
+ </resources>
+ <connections/>
+</ui>
