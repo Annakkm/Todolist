@@ -22,10 +22,10 @@ WindowAdmin::WindowAdmin(QWidget *parent) :
 
     connect(ui->SearchLine, &QLineEdit::textChanged, this, &WindowAdmin::updateSearchResults);
 
+
 }
 
 void WindowAdmin::updateSearchResults(const QString &text) {
-   // searchResultsList->clear();
     displayEmployeesForAdmin(idCompany, text);
 }
 
@@ -92,13 +92,6 @@ void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany, const QString &se
                 row++;
             }
         }
-
-/*
-        if (employeeName.toLower().contains(seachText.toLower())) {
-            QListWidgetItem *item = new QListWidgetItem(employeeName);
-            searchResultsList->addItem(item);
-        }*/
-
     }
     ui->scrollAreaWidgetContents->setLayout(gridlayout_);
 }
@@ -173,6 +166,20 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
 }
 
 
+bool WindowAdmin::hasDoneTasks(int employeeId)
+{
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM tasks WHERE assigned_to_employee_id = :employeeId AND status = 'done'");
+    query.bindValue(":employeeId", employeeId);
+
+    if (query.exec() && query.next()) {
+        int doneTaskCount = query.value(0).toInt();
+        return doneTaskCount > 0;
+    } else {
+        qDebug() << "Error checking if employee has done tasks:" << query.lastError().text();
+        return false;
+    }
+}
 
 
 
@@ -220,6 +227,9 @@ void WindowAdmin::loadDeadlines(int employeeId)
         setDateTime(dateEdits[i], deadlines[i]);
     }
 }
+
+
+
 
 QList<QDate> WindowAdmin::getDeadlines(int employeeId)
 {
@@ -397,6 +407,8 @@ void WindowAdmin::createLineEdits(int number)
         rowLayout->addWidget(dateEdit);
 
         QCheckBox * checkbox = new QCheckBox();
+        checkbox->setEnabled(false);
+
         rowLayout->addWidget(checkbox);
 
 
@@ -405,6 +417,13 @@ void WindowAdmin::createLineEdits(int number)
         lineEdits.append(lEdit);
         dateEdits.append(dateEdit);
         checkBoxes.append(checkbox);
+
+        // Отримання і встановлення статусу чекбокса відповідно до бази даних
+        int selectedEmployeeId = getEmployeeId(selectedEmployeeName, selectedEmployeeEmail);
+        if (selectedEmployeeId != -1) {
+            bool hasDoneTask = hasDoneTasks(selectedEmployeeId);
+            checkbox->setChecked(hasDoneTask);
+        }
 
     }
     ui->widget_tasks->setLayout(layout_2);
@@ -559,6 +578,8 @@ WindowAdmin::~WindowAdmin()
 
 void WindowAdmin::on_btnclose_clicked()
 {
+    db.CloseDatabase();
+    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
     this->close();
     Login * l = new Login();
     l->setWindowFlags(Qt::FramelessWindowHint);

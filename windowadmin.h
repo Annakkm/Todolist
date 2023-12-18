@@ -54,6 +54,7 @@ public slots:
     void clearDateEdits();
     void setDateTime(QDateEdit* dateEdit, const QDate& deadlineDat);
 
+    bool hasDoneTasks(int employeeId);
 
     QList<QDate> getDateForEmployee(int employeeId);//-+
 
@@ -72,6 +73,7 @@ public slots:
     QStringList getTasksForEmployee(int employeeId);
     bool isTaskAlreadyExists(const QString& taskDescription);
     int getTasksId(const int& employeeID, const int& adminId);
+
 
 
 
