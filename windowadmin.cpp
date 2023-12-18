@@ -413,7 +413,7 @@ void WindowAdmin::createLineEdits(int number)
 
         QCheckBox * checkbox = new QCheckBox();
 
-        checkbox->setChecked(false);
+        //checkbox->setChecked(false);
         rowLayout->addWidget(checkbox);
 
 
