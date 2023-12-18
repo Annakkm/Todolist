@@ -93,9 +93,10 @@ private:
     QScrollArea * scrollArea_;
     QScrollArea * scrollArea_main;
     ConnectDB db;
+
     QList<QLineEdit*> lineEdits;
     QList<QDateEdit*> dateEdits;
-
+    QList<QCheckBox*> checkBoxes;
 
     QString selectedEmployeeName;
     QString selectedEmployeeEmail;

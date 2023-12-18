@@ -373,13 +373,18 @@ void WindowAdmin::createLineEdits(int number)
 
         dateEdit->setCalendarPopup(true);
 
-
         rowLayout->addWidget(dateEdit);
+
+        QCheckBox * checkbox = new QCheckBox();
+        rowLayout->addWidget(checkbox);
+
 
         layout_2->addLayout(rowLayout);
 
         lineEdits.append(lEdit);
         dateEdits.append(dateEdit);
+        checkBoxes.append(checkbox);
+
     }
     ui->widget_tasks->setLayout(layout_2);
     ui->widget_tasks->show();
