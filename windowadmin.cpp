@@ -22,7 +22,6 @@ WindowAdmin::WindowAdmin(QWidget *parent) :
 
     connect(ui->SearchLine, &QLineEdit::textChanged, this, &WindowAdmin::updateSearchResults);
 
-
 }
 
 void WindowAdmin::updateSearchResults(const QString &text) {
@@ -133,7 +132,6 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
             lineEdits[i]->setText(description);
 
             loadDeadlines(selectedEmployeeId);
-            ///або тут ЛОГІКА читання з бази натиснуті checkbox
 
             i++;
         }
@@ -157,16 +155,40 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
 
     QList<QDate> dates = getDateForEmployee(selectedEmployeeId);
 
+    QStringList statuses = getStatusesForEmployee(selectedEmployeeId);
+
+
     for (int i = 0; i < qMin(tasks.size(), dateEdits.size()); ++i) {
         lineEdits[i]->setText(tasks[i]);
         setDateTime(dateEdits[i], dates[i]);
-            ///або тут ЛОГІКА читання з бази натиснуті checkbox
+        checkBoxes[i]->setChecked(statuses[i].toLower() == "done");
 
     }
 }
 
 
+QStringList WindowAdmin::getStatusesForEmployee(int employeeId)
+{
+    QStringList statuses;
 
+    QSqlQuery queryStatuses;
+    queryStatuses.prepare("SELECT status FROM tasks WHERE assigned_to_employee_id = :employeeId");
+    queryStatuses.bindValue(":employeeId", employeeId);
+
+    if (queryStatuses.exec())
+    {
+        while (queryStatuses.next())
+        {
+            statuses.append(queryStatuses.value("status").toString());
+        }
+    }
+    else
+    {
+        qDebug() << "Error fetching task statuses:" << queryStatuses.lastError().text();
+    }
+
+    return statuses;
+}
 
 
 void WindowAdmin::handleButtonClick(QPushButton *clickedButton)
@@ -390,8 +412,8 @@ void WindowAdmin::createLineEdits(int number)
         rowLayout->addWidget(dateEdit);
 
         QCheckBox * checkbox = new QCheckBox();
-        checkbox->setEnabled(false);  // Встановлення режиму "readonly"
 
+        checkbox->setChecked(false);
         rowLayout->addWidget(checkbox);
 
 
@@ -400,7 +422,6 @@ void WindowAdmin::createLineEdits(int number)
         lineEdits.append(lEdit);
         dateEdits.append(dateEdit);
         checkBoxes.append(checkbox);
-
 
     }
     ui->widget_tasks->setLayout(layout_2);
@@ -555,8 +576,6 @@ WindowAdmin::~WindowAdmin()
 
 void WindowAdmin::on_btnclose_clicked()
 {
-    db.CloseDatabase();
-    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
     this->close();
     Login * l = new Login();
     l->setWindowFlags(Qt::FramelessWindowHint);

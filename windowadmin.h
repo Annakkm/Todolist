@@ -60,18 +60,19 @@ public slots:
     void updateSearchResults(const QString &text);
 
 
-    QList<QDate> getDeadlines(int employeeId);
     void loadDeadlines(int employeeId);
 
     void clearLineEdits();
-   void createLineEdits(int number);
+    void createLineEdits(int number);
     void clearLayout(QLayout* layout);
     int getEmployeeId(const QString& employeeName, const QString& email);
     int getAdminId(const QString& adminName, const QString& email);
     QStringList getTasksForEmployee(int employeeId);
     bool isTaskAlreadyExists(const QString& taskDescription);
     int getTasksId(const int& employeeID, const int& adminId);
+    QList<QDate> getDeadlines(int employeeId);
 
+    QStringList getStatusesForEmployee(int employeeId);
 
 
 
@@ -86,6 +87,7 @@ private slots:
 private:
     Ui::WindowAdmin *ui;
     int employeeCount;
+    QList<QList<QString>> taskList;  // Приклад структури: taskList[employeeId][taskIndex]
 
 
     QGridLayout * gridlayout_;
