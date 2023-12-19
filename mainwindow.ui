@@ -180,7 +180,7 @@ color: rgb(37, 125, 214);
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnInfo">
+   <widget class="QPushButton" name="btninfo">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -255,30 +255,6 @@ color: rgb(37, 125, 214);
     </property>
     <property name="scaledContents">
      <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="email_text">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>500</y>
-      <width>211</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Fixel Black</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-
-	color: rgb(255, 255, 255);
-}</string>
-    </property>
-    <property name="text">
-     <string>mykhailenko.anna18@gmail.com</string>
     </property>
    </widget>
   </widget>
