@@ -186,10 +186,8 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
         int i = 0;
 
         while (queryTasks.next() && i < 6) {
-
             QString description = queryTasks.value("description").toString();
             QDate deadline = queryTasks.value("deadline").toDate();
-           // QString status = queryTasks.value("status").toString();
 
             qDebug()<<"Опис: "<< description;
             qDebug()<<"Дата: "<< deadline;
@@ -202,32 +200,13 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
 
                 if (i < statuses.size()) {
                     checkBoxes.at(i)->setChecked(statuses.at(i).toLower() == "done");
-                    qDebug()<<"зайшло до done ";
-
-                } else {
-                    qDebug()<<"зайшло до set ";
                 }
-
-
-
-
             i++;
         }
-
-
     } else {
         qDebug() << "Помилка під час виконання запиту SELECT:" << queryTasks.lastError().text();
     }
-
-
-
-
     selectedEmployeeId = getEmployeeId(employeeName, email);
-
-
-
-    //qDebug()<<" Statuses  = "<<statuses;
-
 }
 
 
@@ -235,18 +214,19 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
 void WindowAdmin::loadDeadlines(int employeeId)
 {
     QList<QDate> deadlines = getDeadlines(employeeId);
+
     qDebug()<< deadlines.size()<<", " << dateEdits.size();
-    // Перевірте, чи кількість зчитаних дедлайнів відповідає кількості dateEdit у вашому інтерфейсі
+
     if (deadlines.size() != dateEdits.size()) {
         qDebug() << "Помилка: Розмір списку дедлайнів не відповідає розміру dateEdits";
         return;
     }
 
-    // Встановлюємо дедлайни для кожного dateEdit
     for (int i = 0; i < dateEdits.size(); ++i) {
         setDateTime(dateEdits.at(i), deadlines.at(i));
     }
 }
+
 QStringList WindowAdmin::getStatusesForEmployee(int employeeId)
 {
     QStringList statuses;
@@ -274,7 +254,7 @@ QStringList WindowAdmin::getStatusesForEmployee(int employeeId)
 void WindowAdmin::handleButtonClick(QPushButton *clickedButton)
 {
     if (clickedButton->property("active").toBool()) {
-        // If the button is active, make it inactive
+
         clickedButton->setStyleSheet(""
                                      "background-color: rgb(30, 101, 172);;"
                                      "color: white;"
@@ -329,7 +309,6 @@ void WindowAdmin::setDateTime(QDateEdit* dateEdit, const QDate& deadlineDate)
         if (deadlineDate.isValid()) {
             dateEdit->setDate(deadlineDate);
         } else {
-            // Встановлюємо пусту дату, щоб забезпечити чистий QDateEdit
             dateEdit->setDate(QDate());
         }
     }
@@ -464,6 +443,9 @@ void WindowAdmin::createLineEdits(int number)
         QHBoxLayout *rowLayout = new QHBoxLayout();
 
         QLineEdit *lEdit = new QLineEdit();
+        QDateEdit *dateEdit = new QDateEdit();
+        QCheckBox * checkbox = new QCheckBox();
+        QRadioButton *radioButton = new QRadioButton();
 
         lEdit->setStyleSheet("background:  rgb(30, 101, 172);"
                              "border: 2px solid rgb(255, 255, 255);"
@@ -478,7 +460,6 @@ void WindowAdmin::createLineEdits(int number)
 
         rowLayout->addWidget(lEdit);
 
-        QDateEdit *dateEdit = new QDateEdit();
         dateEdit->setDate(QDate(2023, 1, 1));
 
         dateEdit->setStyleSheet("QDateEdit {"
@@ -502,15 +483,14 @@ void WindowAdmin::createLineEdits(int number)
 
         rowLayout->addWidget(dateEdit);
 
-        QCheckBox * checkbox = new QCheckBox();
 
-        //checkbox->setChecked(false);
         rowLayout->addWidget(checkbox);
 
-        QRadioButton *radioButton = new QRadioButton();
+
         connect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
 
         ui->gridLayout_2->addWidget(radioButton);
+
         radioButtonLineEditMap[radioButton] = lEdit;
 
         layout_2->addLayout(rowLayout);
@@ -540,7 +520,7 @@ bool WindowAdmin::isTaskAlreadyExists(const QString& taskDescription)
 
     } else {
         qDebug() << "Error checking if task already exists:" << query.lastError().text();
-        return false; // Помилка в запиті, ми можемо вважати, що завдання не існує
+        return false;
     }
 }
 
@@ -570,12 +550,10 @@ void WindowAdmin::on_btn_save_clicked()
 
     QString statusTask = "set";
 
-
     if (lineEdits.size() != dateEdits.size()) {
         qDebug() << "Різний розмір списків lineEdits та dateEdits";
         return;
     }
-
 
     for (int i = 0; i < lineEdits.size(); ++i)
     {
@@ -631,7 +609,6 @@ void WindowAdmin::on_btn_update_clicked()
         if (newText != "" && !isTaskAlreadyExists(newText))
         {
             qDebug() << "Введені дані:" << newText << newDate;
-
 
             queryUpdate.prepare(command);
             queryUpdate.bindValue(":newText", newText);

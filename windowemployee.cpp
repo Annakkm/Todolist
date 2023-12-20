@@ -26,8 +26,6 @@ WindowEmployee::WindowEmployee(QWidget *parent) :
     ui->lineEdit_4->setReadOnly(true);
     ui->lineEdit_5->setReadOnly(true);
     ui->lineEdit_6->setReadOnly(true);
-
-
 }
 
 WindowEmployee::~WindowEmployee()
