@@ -50,5 +50,14 @@
     <qresource prefix="/new/prefix4">
         <file>img/calendar.png</file>
         <file>img/calendar_white.png</file>
+        <file>img/bin.png</file>
+        <file>img/cancel.png</file>
+        <file>img/delete (1).png</file>
+        <file>img/delete.png</file>
+        <file>img/loupe.png</file>
+        <file>img/search.png</file>
+        <file>img/searchTwo.png</file>
+        <file>img/accountHuman.png</file>
+        <file>img/icon humanaccount.png</file>
     </qresource>
 </RCC>

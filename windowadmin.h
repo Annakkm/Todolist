@@ -8,9 +8,12 @@
 #include <QDebug>
 #include <QShowEvent>
 #include <QPushButton>
+#include <QRadioButton>
 #include <QSqlError>
 #include <QVBoxLayout>
 #include <QListWidget>
+#include <QSignalMapper>
+#include <QVariant>
 #include <QLabel>
 #include <QScrollArea>
 #include <unordered_set>
@@ -71,9 +74,6 @@ public slots:
     bool isTaskAlreadyExists(const QString& taskDescription);
     int getTasksId(const int& employeeID, const int& adminId);
     QList<QDate> getDeadlines(int employeeId);
-
-
-
     QStringList getStatusesForEmployee(int employeeId);
 
 
@@ -86,10 +86,16 @@ private slots:
 
     void on_btn_update_clicked();
 
+    void onRadioButtonClicked();
+
+
 private:
     Ui::WindowAdmin *ui;
     int employeeCount;
-    QList<QList<QString>> taskList;  // Приклад структури: taskList[employeeId][taskIndex]
+    QList<QList<QString>> taskList;
+
+
+    QHash<QRadioButton*, QLineEdit*> radioButtonLineEditMap;
 
 
     QGridLayout * gridlayout_;
@@ -109,6 +115,8 @@ private:
     int selectedEmployeeId;
     int selectedAdminId;
     int idCompany;
+
+
 
     bool buttonClicked = false;
     bool isTrue = true;

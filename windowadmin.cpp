@@ -22,7 +22,73 @@ WindowAdmin::WindowAdmin(QWidget *parent) :
 
     connect(ui->SearchLine, &QLineEdit::textChanged, this, &WindowAdmin::updateSearchResults);
 
+   /*    QRadioButton *radioButton = new QRadioButton("", this);
+    QLineEdit *lineEdit = new QLineEdit(this);
+    lineEdit->setGeometry(0,100,20,40);
+    radioButton->setProperty("associatedLineEdit", QVariant::fromValue(lineEdit));*/
+
+
+   // connect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+    /*    connect(ui->radioButton_2, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+    connect(ui->radioButton_3, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+    connect(ui->radioButton_4, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+    connect(ui->radioButton_5, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+    connect(ui->radioButton_6, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);*/
+
+
+
+    // В конструктор WindowAdmin
+    //radioButtonMapper = new QSignalMapper(this);
+  //  connect(radioButtonMapper, SIGNAL(mapped(QWidget*)), this, SLOT(onRadioButtonClicked(QWidget*)));
+
 }
+
+void WindowAdmin::onRadioButtonClicked()
+{
+    QRadioButton *clickedRadioButton = qobject_cast<QRadioButton*>(sender());
+    if (clickedRadioButton && radioButtonLineEditMap.contains(clickedRadioButton))
+    {
+        QLineEdit *associatedLineEdit = radioButtonLineEditMap[clickedRadioButton];
+
+        // реалізувати видалення (запит в базу)
+
+        if (associatedLineEdit)
+        {
+            associatedLineEdit->clear();
+            // реалізувати видалення (запит в базу)
+        }
+    }
+}
+
+
+/*int WindowAdmin::getTaskIdByDescription(const QString &description)
+{
+    // Отримати ідентифікатор завдання за текстом
+    QSqlQuery queryTaskId;
+    queryTaskId.prepare("SELECT task_id FROM tasks WHERE description = :description AND assigned_to_employee_id = :employeeId");
+    queryTaskId.bindValue(":description", description);
+    queryTaskId.bindValue(":employeeId", selectedEmployeeId);
+
+    if (queryTaskId.exec() && queryTaskId.next()) {
+        return queryTaskId.value("task_id").toInt();
+    } else {
+        qDebug() << "Помилка отримання ідентифікатора завдання:" << queryTaskId.lastError().text();
+        return -1;
+    }
+}
+*/
+
+/*bool WindowAdmin::deleteTaskById(int taskId)
+{
+    // Видалення завдання за ідентифікатором
+    QSqlQuery queryDelete;
+    queryDelete.prepare("DELETE FROM tasks WHERE task_id = :taskId");
+    queryDelete.bindValue(":taskId", taskId);
+
+    return queryDelete.exec();
+}*/
+
+
 
 void WindowAdmin::updateSearchResults(const QString &text) {
     displayEmployeesForAdmin(idCompany, text);
@@ -96,7 +162,6 @@ void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany, const QString &se
 }
 void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) // метод натиснення на кнопку
 {
-
 
     selectedAdminId = idCompany;
     qDebug()<<"Admin: "<<selectedAdminId;
@@ -295,9 +360,6 @@ QList<QDate> WindowAdmin::getDateForEmployee(int employeeId)
     return dates;
 }
 
-
-
-
 QStringList WindowAdmin::getTasksForEmployee(int employeeId)
 {
     QStringList tasks;
@@ -363,7 +425,6 @@ void WindowAdmin::clearDateEdits()
     dateEdits.clear();
 }
 
-
 void WindowAdmin::onLabelClicked(const QString &link)
 {
     qDebug() << "Ви натиснули на посилання:" << link;
@@ -375,6 +436,17 @@ void WindowAdmin::createLineEdits(int number)
     clearDateEdits();
     clearLayout(layout_2);
 
+
+    for (auto it = radioButtonLineEditMap.begin(); it != radioButtonLineEditMap.end(); ++it) {
+        QRadioButton *radioButton = it.key();
+        disconnect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+
+        delete radioButton;
+        QLineEdit *lineEdit = it.value();
+        delete lineEdit;
+    }
+    radioButtonLineEditMap.clear();
+
     for (int i = 0; i < number; ++i)
     {
         QHBoxLayout *rowLayout = new QHBoxLayout();
@@ -383,7 +455,7 @@ void WindowAdmin::createLineEdits(int number)
 
         lEdit->setStyleSheet("background:  rgb(30, 101, 172);"
                              "border: 2px solid rgb(255, 255, 255);"
-                             "color:  rgb(255, 255, 255);"
+                             "color:  rgb(30, 101, 172);"
                              "border-radius: 14px;"
                              "height:  24px;"
                              "padding-left: 20px;");
@@ -423,6 +495,11 @@ void WindowAdmin::createLineEdits(int number)
         //checkbox->setChecked(false);
         rowLayout->addWidget(checkbox);
 
+        QRadioButton *radioButton = new QRadioButton();
+        connect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
+
+        ui->gridLayout_2->addWidget(radioButton);
+        radioButtonLineEditMap[radioButton] = lEdit;
 
         layout_2->addLayout(rowLayout);
 
@@ -589,3 +666,5 @@ void WindowAdmin::on_btnclose_clicked()
     l->show();
 
 }
+
+

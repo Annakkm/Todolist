@@ -164,7 +164,7 @@ background-color: rgb(54, 57, 67);
    <widget class="QLineEdit" name="SearchLine">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>350</x>
       <y>20</y>
       <width>211</width>
       <height>41</height>
@@ -180,6 +180,71 @@ padding-left: 20px;
 
 }</string>
     </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labeldel">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>40</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+	image: url(:/new/prefix4/img/delete.png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelSearch">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>20</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+image: url(:/new/prefix4/img/searchTwo.png);
+}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>20</y>
+      <width>61</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelSearch_2">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+image: url(:/new/prefix4/img/icon humanaccount.png);
+}
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QWidget" name="baseside" native="true">
@@ -224,7 +289,7 @@ padding-left: 20px;
   <widget class="QWidget" name="widget_tasks" native="true">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>320</x>
      <y>80</y>
      <width>491</width>
      <height>411</height>
@@ -266,7 +331,7 @@ padding-left: 20px;
   <widget class="QPushButton" name="btn_save">
    <property name="geometry">
     <rect>
-     <x>810</x>
+     <x>820</x>
      <y>100</y>
      <width>121</width>
      <height>41</height>
@@ -292,7 +357,7 @@ color: rgb(37, 125, 214);
   <widget class="QPushButton" name="btn_update">
    <property name="geometry">
     <rect>
-     <x>810</x>
+     <x>820</x>
      <y>150</y>
      <width>121</width>
      <height>41</height>
@@ -315,31 +380,23 @@ color: rgb(37, 125, 214);
     <string>Змінити</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_delete">
+  <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>810</x>
-     <y>200</y>
-     <width>121</width>
-     <height>41</height>
+     <x>280</x>
+     <y>80</y>
+     <width>41</width>
+     <height>411</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-background: rgb(30, 101, 172);
-border-radius: 20px;
-color: rgb(255, 255, 255);
-font-size: 15px; 
-font-weight: bold;
-}
-QPushButton:hover{
-background: rgb(255, 255, 255);
-color: rgb(37, 125, 214);
-}</string>
-   </property>
-   <property name="text">
-    <string>Видалити</string>
-   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+   </layout>
   </widget>
  </widget>
  <resources>
