@@ -10,18 +10,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+
     infoDialog = new QDialog(this);
     infoDialog->setWindowTitle("Інформація про програму");
-    // Додайте текст чи вміст до вашого міні-вікна, наприклад:
+
+    QTextBrowser *textBrowser = new QTextBrowser(infoDialog);
+    textBrowser->setPlainText("To Do List - це програма, яка допомагає організовувати робочий день, планувати завдання, відстежувати їх виконання.      Пошта для зв'язку: mykhailenko.anna18@gmail.com");
+    textBrowser->setAlignment(Qt::AlignCenter);
+    textBrowser->setOpenExternalLinks(true);
+    textBrowser->setGeometry(10, 5, 210, 130);
 
     infoDialog->setGeometry(550, 170, 230, 130);
-
-    QLabel *label = new QLabel("Це інформаційне вікно про програму.", infoDialog);
-    label->setAlignment(Qt::AlignCenter);
-
-    // Підключіть слот до події наведення на кнопку
     ui->btninfo->installEventFilter(this);
-
 }
 
 
@@ -42,7 +43,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete infoDialog;
-
 }
 
 

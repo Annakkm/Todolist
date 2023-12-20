@@ -202,8 +202,8 @@ border-bottom: 2px solid rgb(37, 125, 213);
     <rect>
      <x>160</x>
      <y>410</y>
-     <width>159</width>
-     <height>39</height>
+     <width>196</width>
+     <height>43</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">

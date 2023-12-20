@@ -72,6 +72,8 @@ public slots:
     int getTasksId(const int& employeeID, const int& adminId);
     QList<QDate> getDeadlines(int employeeId);
 
+
+
     QStringList getStatusesForEmployee(int employeeId);
 
 

@@ -115,3 +115,9 @@ void Login::on_btnlogin_2_clicked()
     }
 }
 
+
+void Login::on_btn_link2_clicked()
+{
+
+}
+

@@ -9,7 +9,7 @@
 #include <QPainterPath>
 #include <QPainter>
 #include <QRect>
-
+#include <QTextBrowser>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

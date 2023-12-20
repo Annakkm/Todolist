@@ -28,6 +28,8 @@ private slots:
     void on_btnclose_clicked();
     void on_btnlogin_2_clicked();
 
+    void on_btn_link2_clicked();
+
 private:
     Ui::Login *ui;
     ConnectDB db;

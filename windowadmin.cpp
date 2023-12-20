@@ -96,6 +96,8 @@ void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany, const QString &se
 }
 void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) // метод натиснення на кнопку
 {
+
+
     selectedAdminId = idCompany;
     qDebug()<<"Admin: "<<selectedAdminId;
 
@@ -115,13 +117,12 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
     qDebug() << "Натискання на кнопку для:" << employeeName << email;
 
     QSqlQuery queryTasks;
-    queryTasks.prepare("SELECT description, deadline FROM tasks WHERE assigned_to_employee_id = :employeeId");
+    queryTasks.prepare("SELECT description, deadline, status FROM tasks WHERE assigned_to_employee_id = :employeeId");
     queryTasks.bindValue(":employeeId", selectedEmployeeId);
 
     if (queryTasks.exec()) {
         int i = 0;
 
-        qDebug()<<"good";
         while (queryTasks.next() && i < lineEdits.size()) {
 
             QString description = queryTasks.value("description").toString();
@@ -132,6 +133,10 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
             lineEdits[i]->setText(description);
 
             loadDeadlines(selectedEmployeeId);
+
+            QString status = queryTasks.value("status").toString();
+            checkBoxes[i]->setChecked(status.toLower() == "done");
+
 
             i++;
         }
@@ -155,18 +160,34 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
 
     QList<QDate> dates = getDateForEmployee(selectedEmployeeId);
 
-    QStringList statuses = getStatusesForEmployee(selectedEmployeeId);
+   // QStringList statuses = getStatusesForEmployee(selectedEmployeeId);
 
-
+    //qDebug()<<" Statuses  = "<<statuses;
     for (int i = 0; i < qMin(tasks.size(), dateEdits.size()); ++i) {
         lineEdits[i]->setText(tasks[i]);
         setDateTime(dateEdits[i], dates[i]);
-        checkBoxes[i]->setChecked(statuses[i].toLower() == "done");
+       // checkBoxes[i]->setChecked(statuses[i].toLower() == "done");
 
     }
 }
 
 
+
+void WindowAdmin::loadDeadlines(int employeeId)
+{
+    QList<QDate> deadlines = getDeadlines(employeeId);
+    qDebug()<< deadlines.size()<<", " << dateEdits.size();
+    // Перевірте, чи кількість зчитаних дедлайнів відповідає кількості dateEdit у вашому інтерфейсі
+    if (deadlines.size() != dateEdits.size()) {
+        qDebug() << "Помилка: Розмір списку дедлайнів не відповідає розміру dateEdits";
+        return;
+    }
+
+    // Встановлюємо дедлайни для кожного dateEdit
+    for (int i = 0; i < dateEdits.size(); ++i) {
+        setDateTime(dateEdits[i], deadlines[i]);
+    }
+}
 QStringList WindowAdmin::getStatusesForEmployee(int employeeId)
 {
     QStringList statuses;
@@ -220,21 +241,7 @@ void WindowAdmin::handleButtonClick(QPushButton *clickedButton)
 }
 
 
-void WindowAdmin::loadDeadlines(int employeeId)
-{
-    QList<QDate> deadlines = getDeadlines(employeeId);
-    qDebug()<< deadlines.size()<<", " << dateEdits.size();
-    // Перевірте, чи кількість зчитаних дедлайнів відповідає кількості dateEdit у вашому інтерфейсі
-    if (deadlines.size() != dateEdits.size()) {
-        qDebug() << "Помилка: Розмір списку дедлайнів не відповідає розміру dateEdits";
-        return;
-    }
 
-    // Встановлюємо дедлайни для кожного dateEdit
-    for (int i = 0; i < dateEdits.size(); ++i) {
-        setDateTime(dateEdits[i], deadlines[i]);
-    }
-}
 
 QList<QDate> WindowAdmin::getDeadlines(int employeeId)
 {
