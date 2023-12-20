@@ -21,26 +21,6 @@ WindowAdmin::WindowAdmin(QWidget *parent) :
     gridLayout_main = new QGridLayout(ui->scroll_widget_main);
 
     connect(ui->SearchLine, &QLineEdit::textChanged, this, &WindowAdmin::updateSearchResults);
-
-   /*    QRadioButton *radioButton = new QRadioButton("", this);
-    QLineEdit *lineEdit = new QLineEdit(this);
-    lineEdit->setGeometry(0,100,20,40);
-    radioButton->setProperty("associatedLineEdit", QVariant::fromValue(lineEdit));*/
-
-
-   // connect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
-    /*    connect(ui->radioButton_2, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
-    connect(ui->radioButton_3, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
-    connect(ui->radioButton_4, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
-    connect(ui->radioButton_5, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
-    connect(ui->radioButton_6, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);*/
-
-
-
-    // В конструктор WindowAdmin
-    //radioButtonMapper = new QSignalMapper(this);
-  //  connect(radioButtonMapper, SIGNAL(mapped(QWidget*)), this, SLOT(onRadioButtonClicked(QWidget*)));
-
 }
 
 void WindowAdmin::onRadioButtonClicked()
@@ -184,31 +164,14 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
     QSqlQuery queryTasks;
     queryTasks.prepare("SELECT description, deadline, status FROM tasks WHERE assigned_to_employee_id = :employeeId");
     queryTasks.bindValue(":employeeId", selectedEmployeeId);
+    QStringList tasks = getTasksForEmployee(selectedEmployeeId);
+    qDebug()<<"Tasks: "<< tasks;
 
-    if (queryTasks.exec()) {
-        int i = 0;
+    QList<QDate> dates = getDateForEmployee(selectedEmployeeId);
+    qDebug()<<"Dates: "<< dates;
 
-        while (queryTasks.next() && i < lineEdits.size()) {
-
-            QString description = queryTasks.value("description").toString();
-            QDate deadline = queryTasks.value("deadline").toDate();
-            qDebug()<<"Опис: "<< description;
-            qDebug()<<"Дата: "<< deadline;
-
-            lineEdits[i]->setText(description);
-
-            loadDeadlines(selectedEmployeeId);
-
-            QString status = queryTasks.value("status").toString();
-            checkBoxes[i]->setChecked(status.toLower() == "done");
-
-
-            i++;
-        }
-    } else {
-        qDebug() << "Помилка під час виконання запиту SELECT:" << queryTasks.lastError().text();
-    }
-
+    QStringList statuses = getStatusesForEmployee(selectedEmployeeId);
+    qDebug()<<"Statuses: "<< statuses;
 
     if (clickedButton && !buttonClicked) {
         handleButtonClick(static_cast<QPushButton*>(sender()));
@@ -219,21 +182,52 @@ void WindowAdmin::onEmployeeButtonClicked(QString employeeName, QString email) /
                                         "background-color: rgb(90, 95, 111);");
     }
 
+    if (queryTasks.exec()) {
+        int i = 0;
+
+        while (queryTasks.next() && i < 6) {
+
+            QString description = queryTasks.value("description").toString();
+            QDate deadline = queryTasks.value("deadline").toDate();
+           // QString status = queryTasks.value("status").toString();
+
+            qDebug()<<"Опис: "<< description;
+            qDebug()<<"Дата: "<< deadline;
+            qDebug()<<"lineedits size = "<<lineEdits.size()<< ", tasks = " << tasks.size() ;
+            qDebug()<<"Status: "<< statuses;
+
+                lineEdits.at(i)->setText(tasks.at(i));
+                setDateTime(dateEdits.at(i), dates.at(i));
+                qDebug()<<"checkBoxes: "<< checkBoxes;
+
+                if (i < statuses.size()) {
+                    checkBoxes.at(i)->setChecked(statuses.at(i).toLower() == "done");
+                    qDebug()<<"зайшло до done ";
+
+                } else {
+                    qDebug()<<"зайшло до set ";
+                }
+
+
+
+
+            i++;
+        }
+
+
+    } else {
+        qDebug() << "Помилка під час виконання запиту SELECT:" << queryTasks.lastError().text();
+    }
+
+
+
+
     selectedEmployeeId = getEmployeeId(employeeName, email);
 
-    QStringList tasks = getTasksForEmployee(selectedEmployeeId);
 
-    QList<QDate> dates = getDateForEmployee(selectedEmployeeId);
-
-   // QStringList statuses = getStatusesForEmployee(selectedEmployeeId);
 
     //qDebug()<<" Statuses  = "<<statuses;
-    for (int i = 0; i < qMin(tasks.size(), dateEdits.size()); ++i) {
-        lineEdits[i]->setText(tasks[i]);
-        setDateTime(dateEdits[i], dates[i]);
-       // checkBoxes[i]->setChecked(statuses[i].toLower() == "done");
 
-    }
 }
 
 
@@ -250,7 +244,7 @@ void WindowAdmin::loadDeadlines(int employeeId)
 
     // Встановлюємо дедлайни для кожного dateEdit
     for (int i = 0; i < dateEdits.size(); ++i) {
-        setDateTime(dateEdits[i], deadlines[i]);
+        setDateTime(dateEdits.at(i), deadlines.at(i));
     }
 }
 QStringList WindowAdmin::getStatusesForEmployee(int employeeId)
@@ -417,6 +411,22 @@ void WindowAdmin::clearLineEdits()
     lineEdits.clear();
 }
 
+void WindowAdmin::clearRadioButton()
+{
+    for (QRadioButton* radioButton : radiobuttons) {
+        delete radioButton;
+    }
+    radiobuttons.clear();
+}
+
+void WindowAdmin::clearCheckBox()
+{
+    for (QCheckBox* checkBox : checkBoxes) {
+        delete checkBox;
+    }
+    checkBoxes.clear();
+}
+
 void WindowAdmin::clearDateEdits()
 {
     for (QDateEdit* dateEdit : dateEdits) {
@@ -434,10 +444,12 @@ void WindowAdmin::createLineEdits(int number)
 {
     clearLineEdits();
     clearDateEdits();
+    clearCheckBox();
+    clearRadioButton();
     clearLayout(layout_2);
 
 
-    for (auto it = radioButtonLineEditMap.begin(); it != radioButtonLineEditMap.end(); ++it) {
+    /*    for (auto it = radioButtonLineEditMap.begin(); it != radioButtonLineEditMap.end(); ++it) {
         QRadioButton *radioButton = it.key();
         disconnect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
 
@@ -445,7 +457,7 @@ void WindowAdmin::createLineEdits(int number)
         QLineEdit *lineEdit = it.value();
         delete lineEdit;
     }
-    radioButtonLineEditMap.clear();
+    radioButtonLineEditMap.clear();*/
 
     for (int i = 0; i < number; ++i)
     {
@@ -455,7 +467,7 @@ void WindowAdmin::createLineEdits(int number)
 
         lEdit->setStyleSheet("background:  rgb(30, 101, 172);"
                              "border: 2px solid rgb(255, 255, 255);"
-                             "color:  rgb(30, 101, 172);"
+                             "color:  rgb(255, 255, 255);"
                              "border-radius: 14px;"
                              "height:  24px;"
                              "padding-left: 20px;");
@@ -506,6 +518,7 @@ void WindowAdmin::createLineEdits(int number)
         lineEdits.append(lEdit);
         dateEdits.append(dateEdit);
         checkBoxes.append(checkbox);
+        radiobuttons.append(radioButton);
 
     }
     ui->widget_tasks->setLayout(layout_2);

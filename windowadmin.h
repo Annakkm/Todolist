@@ -54,7 +54,6 @@ public slots:
     void onLabelClicked(const QString &link);
     void handleButtonClick(QPushButton *clickedButton);
     void onEmployeeButtonClicked(QString employeeName, QString email); // метод натиснення на кнопку
-    void clearDateEdits();
     void setDateTime(QDateEdit* dateEdit, const QDate& deadlineDat);
 
 
@@ -66,8 +65,14 @@ public slots:
     void loadDeadlines(int employeeId);
 
     void clearLineEdits();
-    void createLineEdits(int number);
+    void clearDateEdits();
+    void clearCheckBox();
+    void clearRadioButton();
+
     void clearLayout(QLayout* layout);
+
+    void createLineEdits(int number);
+
     int getEmployeeId(const QString& employeeName, const QString& email);
     int getAdminId(const QString& adminName, const QString& email);
     QStringList getTasksForEmployee(int employeeId);
@@ -109,6 +114,7 @@ private:
     QList<QLineEdit*> lineEdits;
     QList<QDateEdit*> dateEdits;
     QList<QCheckBox*> checkBoxes;
+    QList<QRadioButton*> radiobuttons;
 
     QString selectedEmployeeName;
     QString selectedEmployeeEmail;
