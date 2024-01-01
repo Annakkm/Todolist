@@ -6,6 +6,8 @@
         <file>img/white_minus_circle_remove_icon.png</file>
         <file>img/white_x_circle_icon.png</file>
         <file>img/white_information_about_support_accessibility_info_icon.png</file>
+        <file>img/companyname.png</file>
+        <file>img/logoCompany.png</file>
     </qresource>
     <qresource prefix="/new/prefix1">
         <file>img/cancel.png</file>
@@ -44,9 +46,6 @@
         <file>img/withwhiteandblue_x_circle_icon.png</file>
         <file>img/x-button.png</file>
     </qresource>
-    <qresource prefix="/new/prefix3">
-        <file>img/search.png</file>
-    </qresource>
     <qresource prefix="/new/prefix4">
         <file>img/calendar.png</file>
         <file>img/calendar_white.png</file>
@@ -59,5 +58,10 @@
         <file>img/searchTwo.png</file>
         <file>img/accountHuman.png</file>
         <file>img/icon humanaccount.png</file>
+        <file>img/clipboard.png</file>
+        <file>img/nameprog.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix3">
+        <file>img/logoCompany.png</file>
     </qresource>
 </RCC>

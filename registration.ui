@@ -90,9 +90,9 @@ color: rgb(255, 255, 255);
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>40</x>
      <y>110</y>
-     <width>351</width>
+     <width>421</width>
      <height>241</height>
     </rect>
    </property>
@@ -110,7 +110,7 @@ text-transform: 	uppercase;
 }</string>
       </property>
       <property name="text">
-       <string>email</string>
+       <string>Пошта</string>
       </property>
      </widget>
     </item>
@@ -127,7 +127,7 @@ text-transform: 	uppercase;
 }</string>
       </property>
       <property name="text">
-       <string>password</string>
+       <string>Пароль</string>
       </property>
      </widget>
     </item>
@@ -182,7 +182,7 @@ text-transform: 	uppercase;
 }</string>
       </property>
       <property name="text">
-       <string>username</string>
+       <string>Ім'я</string>
       </property>
      </widget>
     </item>
@@ -264,7 +264,7 @@ text-transform: 	uppercase;
 }</string>
       </property>
       <property name="text">
-       <string>number phone</string>
+       <string>Номер телефону</string>
       </property>
      </widget>
     </item>
@@ -360,7 +360,7 @@ border-bottom: 2px solid rgb(37, 125, 213);
     <rect>
      <x>90</x>
      <y>370</y>
-     <width>331</width>
+     <width>321</width>
      <height>31</height>
     </rect>
    </property>
@@ -372,60 +372,6 @@ border: none;
    <property name="title">
     <string/>
    </property>
-   <widget class="QRadioButton" name="radioBtnAdmin">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>10</y>
-      <width>60</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QRadioButton{
-font-size: 12px;
-font-weignt:  500;
-text-transform: capitalize;
-display: inline-block;
-vertical-align: middle;
-color: rgb(153, 153, 153);
-}
-
-QRadioButton::hover{
-color: rgb(255, 255, 255);
-}</string>
-    </property>
-    <property name="text">
-     <string>Admin</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioBtnWorker">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>10</y>
-      <width>91</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QRadioButton{
-font-size: 12px;
-font-weignt:  300;
-text-transform: capitalize;
-display: inline-block;
-vertical-align: middle;
-color: rgb(153, 153, 153);
-}
-
-QRadioButton::hover{
-color: rgb(255, 255, 255);
-}</string>
-    </property>
-    <property name="text">
-     <string>Employee</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QPushButton" name="btnlogin_2">
    <property name="geometry">
@@ -456,7 +402,7 @@ color: rgb(255, 255, 255);
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>160</x>
      <y>460</y>
      <width>155</width>
      <height>43</height>
@@ -552,9 +498,9 @@ border-bottom: 2px solid rgb(37, 125, 213);
   <widget class="QLabel" name="label_idtext">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>150</x>
      <y>339</y>
-     <width>87</width>
+     <width>101</width>
      <height>31</height>
     </rect>
    </property>
@@ -569,7 +515,7 @@ text-transform: 	uppercase;
 }</string>
    </property>
    <property name="text">
-    <string>id company:</string>
+    <string>id компанії:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_id_read_only">
@@ -622,6 +568,69 @@ border-bottom: 2px solid rgb(37, 125, 213);
    <property name="placeholderText">
     <string/>
    </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>370</y>
+     <width>281</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="1">
+     <widget class="QRadioButton" name="radioBtnWorker">
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton{
+font-size: 12px;
+font-weignt:  300;
+text-transform: capitalize;
+display: inline-block;
+vertical-align: middle;
+color: rgb(153, 153, 153);
+}
+
+QRadioButton::hover{
+color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Працівник</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QRadioButton" name="radioBtnAdmin">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QRadioButton{
+font-size: 12px;
+font-weignt:  500;
+text-transform: capitalize;
+display: inline-block;
+vertical-align: middle;
+color: rgb(153, 153, 153);
+}
+
+QRadioButton::hover{
+color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Адміністратор</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources>

@@ -16,12 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     infoDialog->setWindowTitle("Інформація про програму");
 
     QTextBrowser *textBrowser = new QTextBrowser(infoDialog);
-    textBrowser->setPlainText("To Do List - це програма, яка допомагає організовувати робочий день, планувати завдання, відстежувати їх виконання.      Пошта для зв'язку: mykhailenko.anna18@gmail.com");
+    textBrowser->setPlainText("TODOLIST PROJECT - це програма, яка допомагає організовувати робочий день, планувати завдання, відстежувати їх виконання.      Пошта для зв'язку: mykhailenko.anna18@gmail.com");
     textBrowser->setAlignment(Qt::AlignCenter);
     textBrowser->setOpenExternalLinks(true);
     textBrowser->setGeometry(10, 5, 210, 130);
 
-    infoDialog->setGeometry(550, 170, 230, 130);
+    infoDialog->setGeometry(535, 500, 230, 130);
     ui->btninfo->installEventFilter(this);
 }
 
