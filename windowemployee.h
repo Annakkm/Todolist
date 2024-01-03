@@ -30,6 +30,8 @@ private slots:
 
 
 
+    void on_btnrefresh_clicked();
+
 private:
     Ui::WindowEmployee *ui;
     QGridLayout * gridlayout_;

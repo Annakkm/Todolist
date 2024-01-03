@@ -37,6 +37,8 @@ private slots:
     int getRandomNumber();
 
     void on_btnlogin_2_clicked();
+    QString hashPassword(const QString &password);
+
 
 private:
     Ui::Registration *ui;

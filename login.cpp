@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QSqlQueryModel>
 #include <QSqlQuery>
-
+#include <QCryptographicHash>
 
 Login::Login(QWidget *parent) :
     QDialog(parent),
@@ -19,26 +19,17 @@ Login::~Login()
     delete ui;
 
 }
+// ... ваш код ...
 
-void Login::on_btnEnter_clicked()
-{
-    QString email = ui->lineEdit_email->text();
-    QString password = ui->lineEdit_password->text();
 
-    if (email != "" && password != ""){
-        QSqlQuery query;
-        if(query.exec("select * from login_w where email = '" + email + "' and password = '" + password + "'")){
-            int count = 0;
-
-            while(query.next()){
-                count++;
-            }
-            if (count == 1){
-                qDebug()<<"email and password is correct";
-            }
-        }
-    }
+QString Login::hashPassword(const QString &password) {
+    QByteArray salt = QCryptographicHash::hash(QByteArray::fromHex("deadbeef"), QCryptographicHash::Sha256);
+    QByteArray hashedPassword = QCryptographicHash::hash(password.toUtf8() + salt, QCryptographicHash::Sha256);
+    qDebug()<<salt;
+    qDebug()<<hashedPassword;
+    return QString(hashedPassword.toHex());
 }
+
 
 
 void Login::on_btnclose_clicked()
@@ -53,62 +44,86 @@ void Login::on_btnclose_clicked()
 void Login::on_btnlogin_2_clicked()
 {
 
-    if(!db.OpenDatabase()){
-        QMessageBox::information(this, "Помилка !", "Перeвірте підключення бази даних");
-    }
-    else {
+    if (!db.OpenDatabase()) {
+        QMessageBox::information(this, "Помилка!", "Перевірте підключення бази даних");
+    } else {
         QString email = ui->lineEdit_email->text();
         QString password = ui->lineEdit_password->text();
+        qDebug() << "Password insert: " << password;
 
+        // Хешуйте введений пароль з використанням солі для порівняння
+        QString hashedInputPassword = hashPassword(password);
+        qDebug() << "Hashed Input Password: " << hashedInputPassword;
 
-        if (email != "" && password != "")
-        {
+        if (email != "" && password != "") {
             QSqlQuery queryAdmin;
-            QString commandAdmin = "SELECT * FROM login_admin WHERE email = :email AND password = :password";
+            QString commandAdmin = "SELECT * FROM login_admin WHERE email = :email";
             queryAdmin.prepare(commandAdmin);
+            queryAdmin.bindValue(":email", email);
+
+            if (queryAdmin.exec()) {
+                if (queryAdmin.next()) {
+                    QString hashedPasswordFromDB = queryAdmin.value("password").toString();
+                    qDebug() << "Hashed Password DB: " << hashedPasswordFromDB;
+
+                    if (ui->radioBtnAdmin->isChecked()) {
+                        queryAdmin.bindValue(":password", hashedPasswordFromDB);
+
+                        qDebug() << "Запит Select for admin виконано успішно!";
+                        wAdmin = new WindowAdmin();
+                        wAdmin->loginWithCredentials(email, hashedPasswordFromDB);
+                        hide();
+                        wAdmin->setWindowFlags(Qt::FramelessWindowHint);
+
+                        if (hashedInputPassword == hashedPasswordFromDB) {
+                            qDebug() << "Email і пароль вірні";
+                            wAdmin->show();
+                        } else {
+                            qDebug() << "Невірний пароль";
+                        }
+                    }
+                }
+                else{
+                    qDebug() << "Помилка під час виконання запиту queryEmployee.next";
+                }
+            }else{
+                qDebug() << "Помилка під час виконання запиту queryEmployee.exec";
+            }
 
             QSqlQuery queryEmployee;
-            QString commandEmployee = "SELECT * FROM login_w WHERE email = :email AND password = :password";
+            QString commandEmployee = "SELECT * FROM login_w WHERE email = :email";
             queryEmployee.prepare(commandEmployee);
+            queryEmployee.bindValue(":email", email);
 
-            if(ui->radioBtnAdmin->isChecked()){
-                queryAdmin.bindValue(":email" , email);
-                queryAdmin.bindValue(":password" , password);
+            if (queryEmployee.exec()) {
+                if (queryEmployee.next()) {
+                    QString hashedPasswordFromDB = queryEmployee.value("password").toString();
+                    qDebug() << "Hashed Password DB: " << hashedPasswordFromDB;
 
-                if (queryAdmin.exec() && queryAdmin.next()){
-                    qDebug() << "Запит Select for admin виконано успішно!";
-                    wAdmin = new WindowAdmin();
-                    wAdmin->loginWithCredentials(email, password);
-                    hide();
-                    wAdmin->setWindowFlags(Qt::FramelessWindowHint);
+                    if (ui->radioBtnWorker->isChecked()) {
+                        queryEmployee.bindValue(":password", hashedPasswordFromDB);
 
-                    wAdmin->show();
+                        if (hashedInputPassword == hashedPasswordFromDB) {
+                            qDebug() << "Email і пароль вірні";
+                            wEmployee = new WindowEmployee();
+                            wEmployee->selectEmployeeData(email, hashedPasswordFromDB);
+                            hide();
+                            wEmployee->setWindowFlags(Qt::FramelessWindowHint);
 
-                }else {
-                    qDebug() << "Помилка під час виконання запиту Select for admin";
-                    QMessageBox::information(this, "Error!", "Ви ввели не правильні дані");
-                }
+                            wEmployee->show();
+                        } else {
+                            qDebug() << "Невірний пароль";
+                        }
 
-            }else if (ui->radioBtnWorker->isChecked())
-            {
-                queryEmployee.bindValue(":email" , email);
-                queryEmployee.bindValue(":password" , password);
-
-                if (queryEmployee.exec()&& queryEmployee.next()){
-                    qDebug() << "Запит Select for employee виконано успішно!";
-                    wEmployee = new WindowEmployee();
-                    wEmployee->selectEmployeeData(email, password);
-                    hide();
-                    wEmployee->setWindowFlags(Qt::FramelessWindowHint);
-
-                    wEmployee->show();
-
+                    }
                 }else{
-                    qDebug() << "Помилка під час виконання запиту Select for employee";
-                    QMessageBox::information(this, "Error!", "Ви ввели не правильні дані");
-
+                    qDebug() << "Помилка під час виконання запиту queryEmployee.next";
                 }
-            }else if ((!ui->radioBtnWorker->isChecked()) && (!ui->radioBtnAdmin->isChecked()) ) {
+            }else{
+                qDebug() << "Помилка під час виконання запиту queryEmployee.exec";
+            }
+
+            if ((!ui->radioBtnWorker->isChecked()) && (!ui->radioBtnAdmin->isChecked())) {
                 QMessageBox::information(this, "Error!", "Виберіть всі пункти");
             }
         }
@@ -116,8 +131,34 @@ void Login::on_btnlogin_2_clicked()
 }
 
 
+
 void Login::on_btn_link2_clicked()
 {
 
 }
 
+
+/*void Login::on_btnEnter_clicked()
+{
+    QString email = ui->lineEdit_email->text();
+    QString password = ui->lineEdit_password->text();
+    qDebug()<<"password: "<<password;
+    QSqlQuery query;
+    query.prepare("SELECT * FROM login_w WHERE email = :email");
+    query.bindValue(":email", email);
+
+    if (query.exec() && query.next()) {
+        QString hashedPasswordFromDB = query.value("password").toString();
+        QString saltFromDB = query.value("salt").toString();
+        qDebug()<<"Hashed Password :"<< hashedPasswordFromDB;
+        // Хешуйте введений пароль з використанням солі для порівняння
+        QString hashedInputPassword = hashPassword(password);
+        qDebug()<<"hashedInputPassword :"<< hashedInputPassword;
+
+        if (hashedInputPassword == hashedPasswordFromDB) {
+            qDebug() << "Email і пароль вірні";
+        } else {
+            qDebug() << "Невірний пароль";
+        }
+    }
+}*/

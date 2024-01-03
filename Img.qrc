@@ -63,5 +63,7 @@
     </qresource>
     <qresource prefix="/new/prefix3">
         <file>img/logoCompany.png</file>
+        <file>img/refresh-button.png</file>
+        <file>img/reload.png</file>
     </qresource>
 </RCC>

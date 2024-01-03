@@ -66,8 +66,13 @@ void Registration::on_btnlogin_2_clicked()
         QString email = ui->lineEdit_email->text();
         QString phone_number = ui->lineEdit_phoneNumber->text();
         QString password = ui->lineEdit_password->text();
+        qDebug()<<"Password: "<<password;
         QString idCompany = ui->lineEdit_id_read_only->text();
         QString AdminId = ui->lineEdit_id->text();
+
+        QString hashedPassword = hashPassword(password);
+        qDebug()<<"HashedPassword: "<<hashedPassword;
+
 
 
         if(full_name != "" && email != "" && phone_number != "" && password != "" && (idCompany != "" ||AdminId != ""))
@@ -87,18 +92,19 @@ void Registration::on_btnlogin_2_clicked()
             queryif.prepare("SELECT * FROM login_admin WHERE idCompany = :idCompany");
             queryif.bindValue(":idCompany", idCompany);
 
+           // query.bindValue(":idCompany", idCompany);
+
             if(ui->radioBtnAdmin->isChecked()){
                 query.bindValue(":idCompany", idCompany);
                 query.bindValue(":full_name", full_name);
                 query.bindValue(":email", email);
                 query.bindValue(":phone_number", phone_number);
-                query.bindValue(":password", password);
+                query.bindValue(":password", hashedPassword);
 
                 if (query.exec()) {
                     qDebug() << "Запит INSERT for admin виконано успішно!";
-                    wAdmin = new WindowAdmin();
                     hide();
-                    wAdmin->show();
+                    login->show();
                 } else {
                     qDebug() << "Помилка під час виконання запиту INSERT for admin";
                 }
@@ -109,15 +115,21 @@ void Registration::on_btnlogin_2_clicked()
                     queryW.bindValue(":full_name", full_name);
                     queryW.bindValue(":email", email);
                     queryW.bindValue(":phone_number", phone_number);
-                    queryW.bindValue(":password", password);
+                    queryW.bindValue(":password", hashedPassword);
                     queryW.bindValue(":AdminId", AdminId);
 
-                    if (queryW.exec() && queryif.exec()) {
+                    if (queryW.exec()) {
+                        if(queryif.exec())
+                        {
                         qDebug() << "Запит INSERT for employee виконано успішно!";
                         wEmployee = new WindowEmployee();
                         hide();
                         wEmployee->show();
+                        }
+                        else{
+                            qDebug() << "Помилка під час виконання запиту queryif ";
 
+                        }
                     }
                     else {
                         qDebug() << "Помилка під час виконання запиту INSERT for employee";
@@ -139,5 +151,11 @@ void Registration::on_btnlogin_2_clicked()
 
         db.CloseDatabase();
     }
+}
+
+QString Registration::hashPassword(const QString &password) {
+    QByteArray salt = QCryptographicHash::hash(QByteArray::fromHex("deadbeef"), QCryptographicHash::Sha256);
+    QByteArray hashedPassword = QCryptographicHash::hash(password.toUtf8() + salt, QCryptographicHash::Sha256);
+    return QString(hashedPassword.toHex());
 }
 

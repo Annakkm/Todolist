@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>756</width>
+    <width>752</width>
     <height>541</height>
    </rect>
   </property>
@@ -51,7 +51,7 @@ background-color: rgb(54, 57, 67);
    <widget class="QLabel" name="label_PageName">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>370</x>
       <y>30</y>
       <width>151</width>
       <height>21</height>
@@ -588,6 +588,26 @@ color: rgb(255, 255, 255);
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>150</y>
+     <width>51</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background: transparent; 
+border: none;
+	image: url(:/new/prefix3/img/reload.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources>

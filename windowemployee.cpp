@@ -152,3 +152,11 @@ void WindowEmployee::queryTask(const int &IdEmp)
     }
 }
 
+
+void WindowEmployee::on_btnrefresh_clicked()
+{
+    qDebug()<<idEmployee;
+
+    queryTask(idEmployee);
+}
+

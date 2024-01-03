@@ -110,7 +110,7 @@ text-transform: 	uppercase;
 }</string>
       </property>
       <property name="text">
-       <string>Пошта</string>
+       <string>Ел. Пошта</string>
       </property>
      </widget>
     </item>
@@ -384,15 +384,15 @@ border: none;
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
-background: rgb(255, 255, 255);;
+background: rgb(30, 101, 172);
 border-radius: 20px;
-color: rgb(37, 125, 214);
+color: rgb(255, 255, 255);
 font-size: 15px; 
 font-weight: bold;
 }
 QPushButton:hover{
-background: rgb(30, 101, 172);
-color: rgb(255, 255, 255);
+background: rgb(255, 255, 255);
+color: rgb(37, 125, 214);
 }</string>
    </property>
    <property name="text">
@@ -402,9 +402,9 @@ color: rgb(255, 255, 255);
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>150</x>
      <y>460</y>
-     <width>155</width>
+     <width>181</width>
      <height>43</height>
     </rect>
    </property>
@@ -439,7 +439,7 @@ color: rgb(36, 122, 208);
 </string>
       </property>
       <property name="text">
-       <string>Log in</string>
+       <string>Логін</string>
       </property>
      </widget>
     </item>

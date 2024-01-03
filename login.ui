@@ -200,9 +200,9 @@ border-bottom: 2px solid rgb(37, 125, 213);
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>130</x>
      <y>410</y>
-     <width>196</width>
+     <width>220</width>
      <height>43</height>
     </rect>
    </property>
@@ -237,7 +237,7 @@ color: rgb(36, 122, 208);
 </string>
       </property>
       <property name="text">
-       <string>Sign up</string>
+       <string>Реєстрація</string>
       </property>
      </widget>
     </item>
@@ -272,7 +272,7 @@ color: rgb(37, 125, 214);
   <widget class="QRadioButton" name="radioBtnAdmin">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>330</y>
      <width>111</width>
      <height>22</height>
