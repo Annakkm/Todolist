@@ -187,7 +187,7 @@ border-bottom: 2px solid rgb(37, 125, 213);
       <property name="font">
        <font>
         <family>Fixel Black</family>
-        <pointsize>10</pointsize>
+        <pointsize>9</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -411,10 +411,10 @@ background: rgb(35, 141, 255);
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>150</x>
      <y>460</y>
-     <width>258</width>
-     <height>43</height>
+     <width>271</width>
+     <height>46</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -431,7 +431,7 @@ background: rgb(35, 141, 255);
      <widget class="QLabel" name="label_link1">
       <property name="font">
        <font>
-        <family>Fixel Black</family>
+        <family>Bahnschrift SemiBold</family>
        </font>
       </property>
       <property name="styleSheet">
@@ -451,7 +451,7 @@ color: rgb(181, 181, 181);
      <widget class="QPushButton" name="btn_link2">
       <property name="font">
        <font>
-        <family>Fixel Black</family>
+        <family>Bahnschrift SemiBold</family>
        </font>
       </property>
       <property name="styleSheet">
@@ -534,7 +534,7 @@ border-bottom: 2px solid rgb(37, 125, 213);
    </property>
    <property name="font">
     <font>
-     <family>Fixel Black</family>
+     <family>Bahnschrift SemiBold</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -624,7 +624,7 @@ border-bottom: 2px solid rgb(37, 125, 213);
       </property>
       <property name="font">
        <font>
-        <family>Fixel Black</family>
+        <family>Bahnschrift SemiBold</family>
         <pointsize>-1</pointsize>
        </font>
       </property>
@@ -651,7 +651,7 @@ color: rgb(255, 255, 255);
      <widget class="QRadioButton" name="radioBtnAdmin">
       <property name="font">
        <font>
-        <family>Fixel Black</family>
+        <family>Bahnschrift SemiBold</family>
         <pointsize>-1</pointsize>
        </font>
       </property>
