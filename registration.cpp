@@ -30,13 +30,12 @@ void Registration::on_btnclose_clicked()
     this->close();
 }
 
-void Registration::on_pushButton_clicked()
-{
-}
 
 
 void Registration::on_btn_link2_clicked()
 {
+    hide();
+    login->setWindowFlags(Qt::FramelessWindowHint);
     login->show();
 }
 
@@ -104,6 +103,7 @@ void Registration::on_btnlogin_2_clicked()
                 if (query.exec()) {
                     qDebug() << "Запит INSERT for admin виконано успішно!";
                     hide();
+                    login->setWindowFlags(Qt::FramelessWindowHint);
                     login->show();
                 } else {
                     qDebug() << "Помилка під час виконання запиту INSERT for admin";
@@ -124,6 +124,7 @@ void Registration::on_btnlogin_2_clicked()
                         qDebug() << "Запит INSERT for employee виконано успішно!";
                         wEmployee = new WindowEmployee();
                         hide();
+                        wEmployee->setWindowFlags(Qt::FramelessWindowHint);
                         wEmployee->show();
                         }
                         else{
@@ -137,7 +138,7 @@ void Registration::on_btnlogin_2_clicked()
                     }
                 }
                 else if (AdminId == ""){
-                    QMessageBox::information(this, "Помилка !", "Введіть всі поля");
+                    QMessageBox::information(this, "Помилка!", "Спробуйте ввести інформацію у поля");
 
                 }
             }
@@ -146,7 +147,7 @@ void Registration::on_btnlogin_2_clicked()
                 QMessageBox::information(this, "Помилка", "Ви не все заповнили");
             }
         }else {
-            QMessageBox::information(this, "Помилка", "Введіть всі поля");
+            QMessageBox::information(this, "Помилка!", "Спробуйте ввести інформацію у поля");
         }
 
         db.CloseDatabase();
@@ -157,5 +158,13 @@ QString Registration::hashPassword(const QString &password) {
     QByteArray salt = QCryptographicHash::hash(QByteArray::fromHex("deadbeef"), QCryptographicHash::Sha256);
     QByteArray hashedPassword = QCryptographicHash::hash(password.toUtf8() + salt, QCryptographicHash::Sha256);
     return QString(hashedPassword.toHex());
+}
+
+
+void Registration::openLoginWindow() {
+    Login *loginWindow = new Login();
+    loginWindow->show();
+    hide();
+    loginWindow->setWindowFlags(Qt::FramelessWindowHint);
 }
 

@@ -6,6 +6,8 @@
 #include <QSqlQueryModel>
 #include <QSqlQuery>
 #include <QCryptographicHash>
+#include "registration.h"
+
 
 Login::Login(QWidget *parent) :
     QDialog(parent),
@@ -19,8 +21,14 @@ Login::~Login()
     delete ui;
 
 }
-// ... ваш код ...
 
+void Login::openRegistrationWindow() {
+    Registration *registrationWindow = new Registration();
+    hide();
+    registrationWindow->setWindowFlags(Qt::FramelessWindowHint);
+    registrationWindow->show();
+
+}
 
 QString Login::hashPassword(const QString &password) {
     QByteArray salt = QCryptographicHash::hash(QByteArray::fromHex("deadbeef"), QCryptographicHash::Sha256);
@@ -72,13 +80,14 @@ void Login::on_btnlogin_2_clicked()
                         qDebug() << "Запит Select for admin виконано успішно!";
                         wAdmin = new WindowAdmin();
                         wAdmin->loginWithCredentials(email, hashedPasswordFromDB);
-                        hide();
                         wAdmin->setWindowFlags(Qt::FramelessWindowHint);
 
                         if (hashedInputPassword == hashedPasswordFromDB) {
+                            hide();
                             qDebug() << "Email і пароль вірні";
                             wAdmin->show();
                         } else {
+                            QMessageBox::information(this, "Помилка!", "Ви ввели не правильний пароль. Спробуйте ще раз");
                             qDebug() << "Невірний пароль";
                         }
                     }
@@ -112,6 +121,8 @@ void Login::on_btnlogin_2_clicked()
 
                             wEmployee->show();
                         } else {
+                            QMessageBox::information(this, "Помилка!", "Ви ввели не правильний пароль. Спробуйте ще раз");
+
                             qDebug() << "Невірний пароль";
                         }
 
@@ -124,41 +135,18 @@ void Login::on_btnlogin_2_clicked()
             }
 
             if ((!ui->radioBtnWorker->isChecked()) && (!ui->radioBtnAdmin->isChecked())) {
-                QMessageBox::information(this, "Error!", "Виберіть всі пункти");
+                QMessageBox::information(this, "Помилка", "Ви не все заповнили");
             }
+        }else{
+            QMessageBox::information(this, "Помилка!", "Спробуйте ввести інформацію у поля");
+            qDebug() << "Спробуйте ввести інформацію у поля";
+
         }
     }
 }
 
-
-
-void Login::on_btn_link2_clicked()
+void Login::on_btnlinkreg_clicked()
 {
-
+    openRegistrationWindow();
 }
 
-
-/*void Login::on_btnEnter_clicked()
-{
-    QString email = ui->lineEdit_email->text();
-    QString password = ui->lineEdit_password->text();
-    qDebug()<<"password: "<<password;
-    QSqlQuery query;
-    query.prepare("SELECT * FROM login_w WHERE email = :email");
-    query.bindValue(":email", email);
-
-    if (query.exec() && query.next()) {
-        QString hashedPasswordFromDB = query.value("password").toString();
-        QString saltFromDB = query.value("salt").toString();
-        qDebug()<<"Hashed Password :"<< hashedPasswordFromDB;
-        // Хешуйте введений пароль з використанням солі для порівняння
-        QString hashedInputPassword = hashPassword(password);
-        qDebug()<<"hashedInputPassword :"<< hashedInputPassword;
-
-        if (hashedInputPassword == hashedPasswordFromDB) {
-            qDebug() << "Email і пароль вірні";
-        } else {
-            qDebug() << "Невірний пароль";
-        }
-    }
-}*/

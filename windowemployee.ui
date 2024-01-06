@@ -133,7 +133,7 @@ background-color: rgb(54, 57, 67);
    <widget class="QPushButton" name="btnclose">
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>700</x>
       <y>10</y>
       <width>21</width>
       <height>21</height>
@@ -145,6 +145,10 @@ background-color: rgb(54, 57, 67);
 	background-color: transparent;
 	background: none;
 	border: none;
+}
+
+QPushButton:hover{
+	image: url(:/new/prefix3/img/8666736_x_circle_iconblue.png);
 }</string>
     </property>
     <property name="text">

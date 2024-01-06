@@ -62,7 +62,7 @@ background-color: rgb(54, 57, 67);
     <property name="geometry">
      <rect>
       <x>650</x>
-      <y>30</y>
+      <y>40</y>
       <width>158</width>
       <height>21</height>
      </rect>
@@ -142,6 +142,10 @@ background-color: rgb(54, 57, 67);
 	background-color: transparent;
 	background: none;
 	border: none;
+}
+
+QPushButton:hover{
+	image: url(:/new/prefix3/img/8666736_x_circle_iconblue.png);
 }</string>
     </property>
     <property name="text">
@@ -165,7 +169,7 @@ background-color: rgb(54, 57, 67);
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>20</y>
+      <y>30</y>
       <width>211</width>
       <height>41</height>
      </rect>
@@ -206,7 +210,7 @@ padding-left: 20px;
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>20</y>
+      <y>30</y>
       <width>71</width>
       <height>41</height>
      </rect>

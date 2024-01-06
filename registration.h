@@ -27,11 +27,11 @@ public:
     explicit Registration(QWidget *parent = nullptr);
     ~Registration();
 
-
+public slots:
+    void openLoginWindow();
 private slots:
 
     void on_btnclose_clicked();
-    void on_pushButton_clicked();
     void on_btn_link2_clicked();
 
     int getRandomNumber();

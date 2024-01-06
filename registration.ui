@@ -55,6 +55,11 @@ background-color: rgb(54, 57, 67);
 	background-color: transparent;
 	background: none;
 	border: none;
+}
+
+QPushButton:hover{
+
+	image: url(:/new/prefix3/img/8666736_x_circle_iconblue.png);
 }</string>
    </property>
    <property name="text">
@@ -99,13 +104,17 @@ color: rgb(255, 255, 255);
    <layout class="QGridLayout" name="gridLayout">
     <item row="2" column="0">
      <widget class="QLabel" name="label_email">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLabel{
 position: absolute;
 left: 0;
 padding: 10 px  0;
-pointer_events: none;
-color: rgb(153, 153, 153);
+color: rgb(255, 255, 255);
 text-transform: 	uppercase;
 }</string>
       </property>
@@ -116,13 +125,17 @@ text-transform: 	uppercase;
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_password">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLabel{
 position: absolute;
 left: 0;
 padding: 10 px  0;
-pointer_events: none;
-color: rgb(153, 153, 153);
+color: rgb(255, 255, 255);
 text-transform: 	uppercase;
 }</string>
       </property>
@@ -171,18 +184,23 @@ border-bottom: 2px solid rgb(37, 125, 213);
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_username">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLabel{
 position: absolute;
 left: 0;
 padding: 10 px  0;
-pointer_events: none;
-color: rgb(153, 153, 153);
+color: rgb(255, 255, 255);
 text-transform: 	uppercase;
 }</string>
       </property>
       <property name="text">
-       <string>Ім'я</string>
+       <string>ПІБ</string>
       </property>
      </widget>
     </item>
@@ -253,13 +271,18 @@ border-bottom: 2px solid rgb(37, 125, 213);
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_phone">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLabel{
 position: absolute;
 left: 0;
 padding: 10 px  0;
-pointer_events: none;
-color: rgb(153, 153, 153);
+color: rgb(255, 255, 255);
 text-transform: 	uppercase;
 }</string>
       </property>
@@ -343,7 +366,7 @@ border-bottom: 2px solid rgb(37, 125, 213);
        <string/>
       </property>
       <property name="maxLength">
-       <number>20</number>
+       <number>150</number>
       </property>
       <property name="cursorPosition">
        <number>0</number>
@@ -355,24 +378,6 @@ border-bottom: 2px solid rgb(37, 125, 213);
     </item>
    </layout>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>370</y>
-     <width>321</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QGroupBox{
-border: none;
-}</string>
-   </property>
-   <property name="title">
-    <string/>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btnlogin_2">
    <property name="geometry">
     <rect>
@@ -382,17 +387,21 @@ border: none;
      <height>51</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Fixel Black</family>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
-background: rgb(30, 101, 172);
+background: rgb(34, 122, 233);
 border-radius: 20px;
 color: rgb(255, 255, 255);
-font-size: 15px; 
-font-weight: bold;
+font-size: 15px;
 }
 QPushButton:hover{
-background: rgb(255, 255, 255);
-color: rgb(37, 125, 214);
+background: rgb(35, 141, 255);
 }</string>
    </property>
    <property name="text">
@@ -402,44 +411,63 @@ color: rgb(37, 125, 214);
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>140</x>
      <y>460</y>
-     <width>181</width>
+     <width>258</width>
      <height>43</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetFixedSize</enum>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QLabel" name="label_link1">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLabel{
 position: absolute;
 left: 0;
 padding: 10 px  11;
-color: rgb(153, 153, 153);
+color: rgb(181, 181, 181);
 }</string>
       </property>
       <property name="text">
-       <string>Маєте акаунт?</string>
+       <string>Маєте обліковий запис?</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="btn_link2">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: transparent;
 border: none;
-color: rgb(153, 153, 153);
+color:rgb(255, 255, 255);
 }
 
 QPushButton::hover{
-color: rgb(36, 122, 208);
+color: rgb(34, 122, 233);
 }
 </string>
       </property>
       <property name="text">
-       <string>Логін</string>
+       <string>Увійти</string>
       </property>
      </widget>
     </item>
@@ -504,13 +532,17 @@ border-bottom: 2px solid rgb(37, 125, 213);
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Fixel Black</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">QLabel{
 position: absolute;
 left: 0;
 padding: 10 px  0;
-pointer_events: none;
-color: rgb(153, 153, 153);
+color: rgb(255, 255, 255);
 text-transform: 	uppercase;
 }</string>
    </property>
@@ -572,13 +604,16 @@ border-bottom: 2px solid rgb(37, 125, 213);
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>370</y>
+     <x>140</x>
+     <y>380</y>
      <width>281</width>
      <height>31</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetFixedSize</enum>
+    </property>
     <item row="0" column="1">
      <widget class="QRadioButton" name="radioBtnWorker">
       <property name="baseSize">
@@ -587,6 +622,12 @@ border-bottom: 2px solid rgb(37, 125, 213);
         <height>0</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QRadioButton{
 font-size: 12px;
@@ -594,7 +635,7 @@ font-weignt:  300;
 text-transform: capitalize;
 display: inline-block;
 vertical-align: middle;
-color: rgb(153, 153, 153);
+color: rgb(193, 193, 193);  
 }
 
 QRadioButton::hover{
@@ -608,17 +649,23 @@ color: rgb(255, 255, 255);
     </item>
     <item row="0" column="0">
      <widget class="QRadioButton" name="radioBtnAdmin">
+      <property name="font">
+       <font>
+        <family>Fixel Black</family>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QRadioButton{
 font-size: 12px;
-font-weignt:  500;
+font-weignt:  300;
 text-transform: capitalize;
 display: inline-block;
 vertical-align: middle;
-color: rgb(153, 153, 153);
+color: rgb(193, 193, 193);  
 }
 
 QRadioButton::hover{

@@ -21,14 +21,16 @@ class Login : public QDialog
 public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
-
+public slots:
+    void openRegistrationWindow();
 private slots:
 
     //void on_btnEnter_clicked();
     void on_btnclose_clicked();
     void on_btnlogin_2_clicked();
 
-    void on_btn_link2_clicked();
+    void on_btnlinkreg_clicked();
+
 private:
     Ui::Login *ui;
     ConnectDB db;

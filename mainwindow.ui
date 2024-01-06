@@ -42,9 +42,9 @@ background-color: rgb(54, 57, 67);
    <widget class="QPushButton" name="btnreg_2">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>300</y>
-      <width>161</width>
+      <x>150</x>
+      <y>290</y>
+      <width>181</width>
       <height>51</height>
      </rect>
     </property>
@@ -57,14 +57,13 @@ background-color: rgb(54, 57, 67);
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
-background: rgb(30, 101, 172);
+background: rgb(34, 122, 233);
 border-radius: 20px;
 color: rgb(255, 255, 255);
-font-size: 15px; 
+font-size: 15px;
 }
 QPushButton:hover{
-background: rgb(255, 255, 255);
-color: rgb(37, 125, 214);
+background: rgb(35, 141, 255);
 }</string>
     </property>
     <property name="text">
@@ -86,6 +85,10 @@ color: rgb(37, 125, 214);
 	background-color: transparent;
 	background: none;
 	border: none;
+}
+
+QPushButton:hover{
+	image: url(:/new/prefix3/img/8666736_x_circle_iconblue.png);
 }</string>
     </property>
     <property name="text">
@@ -116,9 +119,9 @@ color: rgb(37, 125, 214);
    <widget class="QPushButton" name="btnlogin_2">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>360</y>
-      <width>161</width>
+      <x>150</x>
+      <y>350</y>
+      <width>181</width>
       <height>51</height>
      </rect>
     </property>
@@ -131,14 +134,13 @@ color: rgb(37, 125, 214);
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
-background: rgb(30, 101, 172);
+background: rgb(34, 122, 233);
 border-radius: 20px;
 color: rgb(255, 255, 255);
-font-size: 15px; 
+font-size: 15px;
 }
 QPushButton:hover{
-background: rgb(255, 255, 255);
-color: rgb(37, 125, 214);
+background: rgb(35, 141, 255);
 }</string>
     </property>
     <property name="text">
@@ -172,24 +174,6 @@ color: rgb(37, 125, 214);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>150</y>
-      <width>211</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{
-	image: url(:/new/prefix4/img/nameprog.png);
-}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
@@ -216,7 +200,7 @@ color: rgb(37, 125, 214);
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel{
-	image: url(:/new/prefix3/img/logoCompany.png);
+	image: url(:/new/prefix3/img/logoCompanyblue.png);
 }</string>
      </property>
      <property name="text">
@@ -271,6 +255,55 @@ color: rgb(37, 125, 214);
       <string>Develop</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="text_todolist">
+    <property name="geometry">
+     <rect>
+      <x>175</x>
+      <y>143</y>
+      <width>241</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Fixel Black</family>
+      <pointsize>28</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+
+	color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>TODOLIST</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_todolist_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>174</y>
+      <width>211</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Fixel Black</family>
+      <pointsize>28</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+	color: rgb(41, 179, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>PROJECT</string>
+    </property>
    </widget>
   </widget>
  </widget>
