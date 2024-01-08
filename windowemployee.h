@@ -24,6 +24,8 @@ public:
 public slots:
     void selectEmployeeData(const QString &email,const QString &password);
     void queryTask(const int &IdEmp);
+/*    void loginWithCredentialsEmployee(const QString &email, const QString &password);
+*/
 private slots:
     void on_btnclose_clicked();
     void onCheckboxClicked(bool checked);

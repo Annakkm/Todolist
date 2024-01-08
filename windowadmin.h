@@ -49,7 +49,7 @@ public:
     ~WindowAdmin();
 
 public slots:
-    void loginWithCredentials(const QString &email, const QString &password);
+    void loginWithCredentialsAdmin(const QString &email, const QString &password);
     void displayEmployeesForAdmin(int adminIdCompany, const QString &seachText);
     void onLabelClicked(const QString &link);
     void handleButtonClick(QPushButton *clickedButton);

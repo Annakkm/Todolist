@@ -23,6 +23,7 @@ public:
     ~Login();
 public slots:
     void openRegistrationWindow();
+
 private slots:
 
     //void on_btnEnter_clicked();

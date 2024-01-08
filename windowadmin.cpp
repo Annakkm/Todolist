@@ -21,6 +21,7 @@ WindowAdmin::WindowAdmin(QWidget *parent) :
     gridLayout_main = new QGridLayout(ui->scroll_widget_main);
 
     connect(ui->SearchLine, &QLineEdit::textChanged, this, &WindowAdmin::updateSearchResults);
+    ui->labeldel->hide();
 }
 
 void WindowAdmin::onRadioButtonClicked()
@@ -41,40 +42,13 @@ void WindowAdmin::onRadioButtonClicked()
 }
 
 
-/*int WindowAdmin::getTaskIdByDescription(const QString &description)
-{
-    // Отримати ідентифікатор завдання за текстом
-    QSqlQuery queryTaskId;
-    queryTaskId.prepare("SELECT task_id FROM tasks WHERE description = :description AND assigned_to_employee_id = :employeeId");
-    queryTaskId.bindValue(":description", description);
-    queryTaskId.bindValue(":employeeId", selectedEmployeeId);
-
-    if (queryTaskId.exec() && queryTaskId.next()) {
-        return queryTaskId.value("task_id").toInt();
-    } else {
-        qDebug() << "Помилка отримання ідентифікатора завдання:" << queryTaskId.lastError().text();
-        return -1;
-    }
-}
-*/
-
-/*bool WindowAdmin::deleteTaskById(int taskId)
-{
-    // Видалення завдання за ідентифікатором
-    QSqlQuery queryDelete;
-    queryDelete.prepare("DELETE FROM tasks WHERE task_id = :taskId");
-    queryDelete.bindValue(":taskId", taskId);
-
-    return queryDelete.exec();
-}*/
-
 
 
 void WindowAdmin::updateSearchResults(const QString &text) {
     displayEmployeesForAdmin(idCompany, text);
 }
 
-void WindowAdmin::loginWithCredentials(const QString &email, const QString &password)
+void WindowAdmin::loginWithCredentialsAdmin(const QString &email, const QString &password)
 {
     QSqlQuery query;
     query.prepare("SELECT idCompany,full_name FROM login_admin WHERE email = :email AND password = :password");
@@ -97,6 +71,8 @@ void WindowAdmin::loginWithCredentials(const QString &email, const QString &pass
         qDebug() << "Невірний email або пароль";
     }
 }
+
+
 
 void WindowAdmin::displayEmployeesForAdmin(int adminIdCompany, const QString &seachText)
 {
@@ -427,17 +403,6 @@ void WindowAdmin::createLineEdits(int number)
     clearRadioButton();
     clearLayout(layout_2);
 
-
-    /*    for (auto it = radioButtonLineEditMap.begin(); it != radioButtonLineEditMap.end(); ++it) {
-        QRadioButton *radioButton = it.key();
-        disconnect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
-
-        delete radioButton;
-        QLineEdit *lineEdit = it.value();
-        delete lineEdit;
-    }
-    radioButtonLineEditMap.clear();*/
-
     for (int i = 0; i < number; ++i)
     {
         QHBoxLayout *rowLayout = new QHBoxLayout();
@@ -503,6 +468,7 @@ void WindowAdmin::createLineEdits(int number)
     }
     ui->widget_tasks->setLayout(layout_2);
     ui->widget_tasks->show();
+    ui->labeldel->show();
 
 }
 

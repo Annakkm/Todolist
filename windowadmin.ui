@@ -142,10 +142,6 @@ background-color: rgb(54, 57, 67);
 	background-color: transparent;
 	background: none;
 	border: none;
-}
-
-QPushButton:hover{
-	image: url(:/new/prefix3/img/8666736_x_circle_iconblue.png);
 }</string>
     </property>
     <property name="text">
@@ -416,7 +412,7 @@ color: rgb(37, 125, 214);
   <widget class="QLabel" name="labeldel">
    <property name="geometry">
     <rect>
-     <x>297</x>
+     <x>295</x>
      <y>83</y>
      <width>51</width>
      <height>31</height>

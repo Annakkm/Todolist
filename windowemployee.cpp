@@ -77,22 +77,33 @@ void WindowEmployee::onCheckboxClicked(bool checked)
 
 void WindowEmployee::selectEmployeeData(const QString &email,const QString &password)
 {
+    qDebug()<<"selectEmployeeData enter";
+    qDebug()<<"Email: "<< email;
+    qDebug()<<"Password: "<< password;
+
     QSqlQuery query;
-    QString command = "SELECT id, full_name FROM login_w WHERE email = :email and password = :password";
+    QString command = "SELECT * FROM login_w WHERE email = :email and password = :password";
     query.prepare(command);
     query.bindValue(":email", email);
     query.bindValue(":password", password);
 
-    if (query.exec() && query.next()){
-        idEmployee = query.value("id").toInt();
-        QString fullname = query.value("full_name").toString();
+    if (query.exec()) {
+        // Отримати перший запис, якщо вона доступна
+        if (query.next()) {
+            idEmployee = query.value(0).toInt();
+            QString fullname = query.value(1).toString();
 
-        qDebug() << "Успішний вхід. id =" << idEmployee;
-        qDebug() << "Успішний вхід. fullname =" << fullname;
-        qDebug() << "Успішний вхід. email =" << email;
+            qDebug() << "Успішний вхід. id =" << idEmployee;
+            qDebug() << "Успішний вхід. fullname =" << fullname;
+            qDebug() << "Успішний вхід. email =" << email;
 
-        ui->employeeName->setText(fullname);
-        ui->employeeEmail->setText(email);
+            ui->employeeName->setText(fullname);
+            ui->employeeEmail->setText(email);
+        } else {
+            qDebug() << "Записи для заданої електронної пошти та пароля не знайдено.";
+        }
+    } else {
+        qDebug() << "Не вдалося виконати запит. Помилка:" << query.lastError().text();
     }
 
     queryTask(idEmployee);
@@ -101,7 +112,7 @@ void WindowEmployee::selectEmployeeData(const QString &email,const QString &pass
 
 void WindowEmployee::queryTask(const int &IdEmp)
 {
-    qDebug()<<IdEmp;
+    qDebug()<<"IdEmp: "<<IdEmp;
     QSqlQuery queryTask;
     QString command ="SELECT task_id, description, deadline, assigned_by_admin_id, status FROM tasks WHERE assigned_to_employee_id = :assigned_to_employee_id";
     queryTask.prepare(command);
@@ -152,6 +163,28 @@ void WindowEmployee::queryTask(const int &IdEmp)
     }
 }
 
+/*void WindowAdmin::loginWithCredentialsEmployee(const QString &email, const QString &password)
+{
+    QSqlQuery query;
+    query.prepare("SELECT AdminId,full_name FROM login_w WHERE email = :email AND password = :password");
+    query.bindValue(":email", email);
+    query.bindValue(":password", password);
+
+    if (query.exec() && query.next()) {
+        idCompany = query.value("AdminId").toInt();
+        QString name = query.value("full_name").toString();
+
+        ui->label_name->setText(name);
+        ui->label_email->setText(email);
+
+        qDebug() << "Успішний вхід. IdCompany =" << idCompany;
+        qDebug() << "Успішний вхід. name =" << name;
+
+        QString searchText = ui->SearchLine->text();
+    } else {
+        qDebug() << "Невірний email або пароль";
+    }
+}*/
 
 void WindowEmployee::on_btnrefresh_clicked()
 {

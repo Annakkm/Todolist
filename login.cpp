@@ -22,12 +22,12 @@ Login::~Login()
 
 }
 
+
 void Login::openRegistrationWindow() {
     Registration *registrationWindow = new Registration();
     hide();
     registrationWindow->setWindowFlags(Qt::FramelessWindowHint);
     registrationWindow->show();
-
 }
 
 QString Login::hashPassword(const QString &password) {
@@ -79,7 +79,7 @@ void Login::on_btnlogin_2_clicked()
 
                         qDebug() << "Запит Select for admin виконано успішно!";
                         wAdmin = new WindowAdmin();
-                        wAdmin->loginWithCredentials(email, hashedPasswordFromDB);
+                        wAdmin->loginWithCredentialsAdmin(email, hashedPasswordFromDB);
                         wAdmin->setWindowFlags(Qt::FramelessWindowHint);
 
                         if (hashedInputPassword == hashedPasswordFromDB) {
