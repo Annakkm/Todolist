@@ -125,9 +125,9 @@ void Registration::on_btnlogin_2_clicked()
                         qDebug() << "Запит INSERT for employee виконано успішно!";
                         wEmployee = new WindowEmployee();
                         hide();
-                        wEmployee->selectEmployeeData(email, hashedPassword);
-                        wEmployee->setWindowFlags(Qt::FramelessWindowHint);
-                        wEmployee->show();
+                        //wEmployee->selectEmployeeData(email, hashedPassword);
+                        login->setWindowFlags(Qt::FramelessWindowHint);
+                        login->show();
                         }
                         else{
                             qDebug() << "Помилка під час виконання запиту queryif ";

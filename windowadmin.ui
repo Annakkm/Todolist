@@ -254,30 +254,7 @@ image: url(:/new/prefix4/img/icon humanaccount.png);
      <item row="0" column="0">
       <widget class="QScrollArea" name="scrollArea">
        <property name="styleSheet">
-        <string notr="true">QScrollBar:vertical{
-	border: none;
-	background-color: rgb(30, 101, 172);
-    width: 14px;
-    margin: 15px 0 15px 0;
-    border-radius: 0 px;
-}
-
-
-QScrollBar::handle:vertical{
-	background-color: rgb(30, 101, 172);
-}
-
-
-QScrollBar::handle:vertical:hover{
-	background-color: rgb(255, 255, 255);
-}
-
-QScrollBar::handle:vertical:pressed{
-	background-color: rgb(21, 71, 121);
-
-}
-
-</string>
+        <string notr="true"/>
        </property>
        <property name="widgetResizable">
         <bool>true</bool>

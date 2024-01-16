@@ -61,9 +61,9 @@ background-color: rgb(54, 57, 67);
   <widget class="QLabel" name="label_reg">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>170</x>
      <y>90</y>
-     <width>151</width>
+     <width>171</width>
      <height>71</height>
     </rect>
    </property>
@@ -81,7 +81,7 @@ color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Логін</string>
+    <string>Увійти</string>
    </property>
   </widget>
   <widget class="QWidget" name="gridLayoutWidget">

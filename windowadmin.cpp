@@ -395,6 +395,24 @@ void WindowAdmin::onLabelClicked(const QString &link)
     qDebug() << "Ви натиснули на посилання:" << link;
 }
 
+QDate WindowAdmin::getDeadlineForTask(int employeeId, const QString &taskDescription)
+{
+    QSqlQuery queryDeadline;
+    queryDeadline.prepare("SELECT deadline FROM tasks WHERE assigned_to_employee_id = :employeeId AND description = :description");
+    queryDeadline.bindValue(":employeeId", employeeId);
+    queryDeadline.bindValue(":description", taskDescription);
+
+    if (queryDeadline.exec() && queryDeadline.next())
+    {
+        return queryDeadline.value("deadline").toDate();
+    }
+    else
+    {
+        qDebug() << "Помилка отримання дедлайну для завдання:" << queryDeadline.lastError().text();
+        return QDate(); // Повернути невалідну дату у випадку помилки
+    }
+}
+
 void WindowAdmin::createLineEdits(int number)
 {
     clearLineEdits();
@@ -403,30 +421,29 @@ void WindowAdmin::createLineEdits(int number)
     clearRadioButton();
     clearLayout(layout_2);
 
+    QList<QString> existingTasks = getTasksForEmployee(selectedEmployeeId);
+
     for (int i = 0; i < number; ++i)
     {
         QHBoxLayout *rowLayout = new QHBoxLayout();
 
         QLineEdit *lEdit = new QLineEdit();
         QDateEdit *dateEdit = new QDateEdit();
-        QCheckBox * checkbox = new QCheckBox();
+        QCheckBox *checkbox = new QCheckBox();
         QRadioButton *radioButton = new QRadioButton();
 
-        lEdit->setStyleSheet("background:  rgb(30, 101, 172);"
+        // Загальний стиль для всіх елементів
+        lEdit->setStyleSheet("background: rgb(30, 101, 172);"
                              "border: 2px solid rgb(255, 255, 255);"
-                             "color:  rgb(255, 255, 255);"
+                             "color: rgb(255, 255, 255);"
                              "border-radius: 14px;"
-                             "height:  24px;"
+                             "height: 24px;"
                              "padding-left: 20px;");
 
-
-        lEdit->setPlaceholderText(QString("Введіть дані %1").arg(i + 1));
-
-
+        lEdit->setPlaceholderText(QString("Введіть завдання %1").arg(i + 1));
         rowLayout->addWidget(lEdit);
 
-        dateEdit->setDate(QDate(2023, 1, 1));
-
+        // Загальний стиль для QDateEdit
         dateEdit->setStyleSheet("QDateEdit {"
                                 "background: rgb(30, 101, 172);"
                                 "padding: 3px;"
@@ -441,17 +458,13 @@ void WindowAdmin::createLineEdits(int number)
                                 "    width: 30px;"
                                 "    height: 16px;"
                                 "    border: none;"
-                                "}"
-                                );
+                                "}");
+        QString dateString = "01012024";
 
-        dateEdit->setCalendarPopup(true);
+        dateEdit->setDate(QDate::fromString(dateString, "ddMMyyyy"));
 
         rowLayout->addWidget(dateEdit);
-
-
         rowLayout->addWidget(checkbox);
-
-
         connect(radioButton, &QRadioButton::clicked, this, &WindowAdmin::onRadioButtonClicked);
 
         ui->gridLayout_2->addWidget(radioButton);
@@ -465,11 +478,31 @@ void WindowAdmin::createLineEdits(int number)
         checkBoxes.append(checkbox);
         radiobuttons.append(radioButton);
 
+        if (i < existingTasks.size())
+        {
+            QString taskDescription = existingTasks.at(i);
+            QDate taskDeadline = getDeadlineForTask(selectedEmployeeId, taskDescription);
+
+            int daysUntilDeadline = QDate::currentDate().daysTo(taskDeadline);
+
+            if (daysUntilDeadline <= 7)
+            {
+                if (!isTaskAlreadyExists(taskDescription))
+                {
+                    // Змінити стиль для елементів, якщо дедлайн близько
+                    lEdit->setStyleSheet("background: rgb(255, 0, 0);"
+                                         "border: 2px solid rgb(255, 255, 255);"
+                                         "color: rgb(255, 255, 255);"
+                                         "border-radius: 14px;"
+                                         "height: 24px;"
+                                         "padding-left: 20px;");
+                }
+            }
+        }
     }
     ui->widget_tasks->setLayout(layout_2);
     ui->widget_tasks->show();
     ui->labeldel->show();
-
 }
 
 
@@ -527,7 +560,7 @@ void WindowAdmin::on_btn_save_clicked()
 
         QString enteredText = lineEdits[i]->text();
         QDate selectedDate = dateEdits[i]->date();
-        QDate defaultDate(2023, 1, 1);
+        QDate defaultDate(2024, 1, 1);
 
         if(enteredText != "" && selectedDate != defaultDate){
 

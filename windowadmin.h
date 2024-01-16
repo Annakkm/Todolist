@@ -55,54 +55,37 @@ public slots:
     void handleButtonClick(QPushButton *clickedButton);
     void onEmployeeButtonClicked(QString employeeName, QString email); // метод натиснення на кнопку
     void setDateTime(QDateEdit* dateEdit, const QDate& deadlineDat);
-
-
-    QList<QDate> getDateForEmployee(int employeeId);//-+
-
-    void updateSearchResults(const QString &text);
-
-
     void loadDeadlines(int employeeId);
-
+    void updateSearchResults(const QString &text);
     void clearLineEdits();
     void clearDateEdits();
     void clearCheckBox();
     void clearRadioButton();
-
     void clearLayout(QLayout* layout);
-
     void createLineEdits(int number);
+
+    bool isTaskAlreadyExists(const QString& taskDescription);
 
     int getEmployeeId(const QString& employeeName, const QString& email);
     int getAdminId(const QString& adminName, const QString& email);
-    QStringList getTasksForEmployee(int employeeId);
-    bool isTaskAlreadyExists(const QString& taskDescription);
     int getTasksId(const int& employeeID, const int& adminId);
-    QList<QDate> getDeadlines(int employeeId);
+
+    QStringList getTasksForEmployee(int employeeId);
     QStringList getStatusesForEmployee(int employeeId);
-
-
-
+    QList<QDate> getDeadlines(int employeeId);
+    QList<QDate> getDateForEmployee(int employeeId);//-+
+    QDate getDeadlineForTask(int employeeId, const QString &taskDescription);
 
 private slots:
     void on_btnclose_clicked();
-
     void on_btn_save_clicked();
-
     void on_btn_update_clicked();
-
     void onRadioButtonClicked();
-
-
 private:
     Ui::WindowAdmin *ui;
     int employeeCount;
     QList<QList<QString>> taskList;
-
-
     QHash<QRadioButton*, QLineEdit*> radioButtonLineEditMap;
-
-
     QGridLayout * gridlayout_;
     QGridLayout * gridLayout_main;
     QVBoxLayout * layout_2;
@@ -121,9 +104,6 @@ private:
     int selectedEmployeeId;
     int selectedAdminId;
     int idCompany;
-
-
-
     bool buttonClicked = false;
     bool isTrue = true;
     bool isChecked = false;
@@ -133,10 +113,6 @@ private:
     QDateEdit *currentDateEdit;
 
     QList<QDate> deadlines;
-
-  //  QListWidget *searchResultsList;
-
-
 };
 
 #endif // WINDOWADMIN_H

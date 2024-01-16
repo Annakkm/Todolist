@@ -26,6 +26,16 @@ WindowEmployee::WindowEmployee(QWidget *parent) :
     ui->lineEdit_4->setReadOnly(true);
     ui->lineEdit_5->setReadOnly(true);
     ui->lineEdit_6->setReadOnly(true);
+    QString dateString = "01012024";
+
+    ui->dateEdit_1->setDate(QDate::fromString(dateString, "ddMMyyyy"));
+
+    ui->dateEdit_2->setDate(QDate::fromString(dateString, "ddMMyyyy"));
+    ui->dateEdit_3->setDate(QDate::fromString(dateString, "ddMMyyyy"));
+    ui->dateEdit_4->setDate(QDate::fromString(dateString, "ddMMyyyy"));
+    ui->dateEdit_5->setDate(QDate::fromString(dateString, "ddMMyyyy"));
+    ui->dateEdit_6->setDate(QDate::fromString(dateString, "ddMMyyyy"));
+
 }
 
 WindowEmployee::~WindowEmployee()
